@@ -1,0 +1,34 @@
+<configuration debug="false">
+
+    <appender name="JSON" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <fieldNames>
+                <levelValue>[ignore]</levelValue>
+                <timestamp>timestamp</timestamp>
+                <version>version</version>
+            </fieldNames>
+        </encoder>
+    </appender>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%cyan(%d{HH:mm:ss.SSS}) %gray([%thread]) %highlight(%-5level) %magenta(%logger{36}) - %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <logger name="com.cabinparser" level="DEBUG"/>
+
+    <logger name="org.flywaydb.core" level="INFO"/>
+    <logger name="io.micronaut.flyway" level="INFO"/>
+
+    <logger name="io.lettuce" level="INFO"/>
+
+    <!-- lettuce.core.protocol's ConnectionHandler is very verbose, even at INFO level -->
+    <logger name="io.lettuce.core.protocol" level="WARN"/>
+
+
+    <root level="info">
+        <appender-ref ref="${LOGBACK_APPENDER:-STDOUT}"/>
+    </root>
+</configuration>

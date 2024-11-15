@@ -1,0 +1,51 @@
+micronaut:
+  application:
+    name: cabin-parser
+  server:
+    port: 8085
+    cors:
+      enabled: false
+  http:
+    client:
+      read-idle-timeout: 30m
+    services:
+      megaubytovanie-client:
+        url: https://megaubytovanie.sk
+        read-timeout: 10s
+      web-api-megaubytovanie-client:
+        url: https://web-api.megaubytovanie.sk
+        read-timeout: 10s
+      google-maps-client:
+        url: https://maps.googleapis.com
+        read-timeout: 10s
+
+datasources:
+  default:
+    dialect: POSTGRES
+    url: jdbc:postgresql://127.0.0.1:5432/cabin_parser
+    driverClassName: org.postgresql.Driver
+    username: root
+    password: root
+    schemaGenerate: NONE
+    pool-name: cabin_parser
+    schema: public
+    minimumIdle: 0
+    maximumPoolSize: 100
+    maxLifetime: 900000
+    automaticValidationQuery: false
+    dataSourceProperties:
+      options: -cstatement_timeout=240000 # postgres statement timeout (ms) - must be lower than read-timeout below
+      socketTimeout: 270 # postgres connection read-timeout (s) - connect-timeout is already 10s per default
+
+flyway:
+  datasources:
+    default:
+      enabled: true
+      clean-schema: false
+      schema: public
+      default-schema: public
+      locations: db/migration/common
+      out-of-order: true
+
+google:
+  api-key: "SET_ME"

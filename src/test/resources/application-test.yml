@@ -1,0 +1,8 @@
+micronaut:
+  application:
+    env: test
+
+logger:
+  io:
+    micronaut: DEBUG
+    netty: DEBUG

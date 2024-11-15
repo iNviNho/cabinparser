@@ -1,0 +1,24 @@
+Thumbs.db
+.gradle
+build/
+target/
+out/
+bin/
+*.ipr
+*.iws
+.project
+.settings
+.classpath
+.factorypath
+
+# IntelliJ
+*.iml
+.idea/*
+!.idea/runConfigurations/
+.run/Application (staging).run.xml
+
+# Mac
+.DS_Store\
+
+src/main/resources/application-local.yml
+frontend/cabin-parser-app/public/config.js

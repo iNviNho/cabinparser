@@ -1,0 +1,79 @@
+{
+  "name": "Chata A",
+  "custom_name": null,
+  "unit_type": {
+    "id": 19,
+    "name": "Chata",
+    "active": true,
+    "identifier": "cabin",
+    "show_bedrooms_count_by_name": true,
+    "show_beds_count_by_name": false,
+    "name_locative": "v chate"
+  },
+  "owner_defined_beds_count": null,
+  "units_count": 1,
+  "bedrooms_count": 4,
+  "sleeping_capacity": 9,
+  "other_rooms_counts": [
+    {
+      "room_subtype": {
+        "id": 24,
+        "name": "Obývací priestor",
+        "active": true,
+        "identifier": "living-area"
+      },
+      "rooms_count": 1
+    },
+    {
+      "room_subtype": {
+        "id": 23,
+        "name": "Kuchyňa",
+        "active": true,
+        "identifier": "kitchen"
+      },
+      "rooms_count": 1
+    },
+    {
+      "room_subtype": {
+        "id": 20,
+        "name": "Kúpeľňa s toaletou",
+        "active": true,
+        "identifier": "bathroom-with-toilet"
+      },
+      "rooms_count": 3
+    }
+  ],
+  "regular_beds": [
+    {
+      "same_beds_count": 4,
+      "single_bed_sleeping_capacity": 2,
+      "outside_room_location": null,
+      "regular_bed_type": {
+        "id": 2002,
+        "name": "Manželská posteľ",
+        "active": true,
+        "features_group": "regular-bed-types",
+        "short_name": "Manželská posteľ",
+        "identifier": "double-bed"
+      },
+      "merge_possible": false,
+      "split_possible": false
+    }
+  ],
+  "extra_beds": [
+    {
+      "same_beds_count": 1,
+      "single_bed_sleeping_capacity": 1,
+      "outside_room_location": null,
+      "extra_bed_type": {
+        "id": 1005,
+        "name": "výsuvné lôžko",
+        "active": true,
+        "features_group": "extra-bed-types",
+        "short_name": "výsuvné lôžko",
+        "identifier": "trundle-bed"
+      }
+    }
+  ],
+  "id": 24832
+}

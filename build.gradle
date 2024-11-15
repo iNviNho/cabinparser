@@ -1,0 +1,174 @@
+plugins {
+    id("io.micronaut.application") version "$micronautVersion"
+    // states which micronaut version to use, as well as its transitive dependencies
+    id("io.micronaut.aot") version "$micronautVersion"
+    id("org.sonarqube") version "4.4.1.3373"
+    id("jacoco")
+    id("checkstyle")
+    id("com.github.johnrengelman.shadow") version "8.1.1"
+    id("com.github.ben-manes.versions") version "0.51.0"
+}
+
+//set the project version for datadog versioning
+if (project.hasProperty('projVersion')) {
+    version = project.projVersion
+} else {
+    version = '0.1.0-SNAPSHOT'
+}
+
+group = "com.cabinparser"
+
+repositories {
+    mavenCentral()
+    // Packages for Schema Registry
+    maven {
+        url "https://packages.confluent.io/maven/"
+    }
+    maven {
+        url "https://jitpack.io"
+    }
+}
+
+micronaut {
+    runtime("netty")
+    testRuntime("junit5")
+    processing {
+        incremental(true)
+        annotations("com.cabinparser.*")
+    }
+    aot {
+        // https://micronaut-projects.github.io/micronaut-aot/latest/guide/
+        optimizeServiceLoading = true
+        convertYamlToJava = true
+        precomputeOperations = true
+        cacheEnvironment = true
+        optimizeClassLoading = true
+        deduceEnvironment = true
+    }
+}
+
+dependencies {
+    annotationProcessor("org.projectlombok:lombok")
+    annotationProcessor("io.micronaut.data:micronaut-data-processor")
+    annotationProcessor("org.mapstruct:mapstruct-processor:$mapstructVersion")
+    annotationProcessor("io.micronaut:micronaut-http-validation")
+    annotationProcessor("io.micronaut.validation:micronaut-validation-processor")
+    annotationProcessor("io.micronaut.openapi:micronaut-openapi")
+    annotationProcessor("io.micronaut.security:micronaut-security-annotations")
+
+    implementation("org.apache.httpcomponents.client5:httpclient5:$apacheHttpClient")
+    implementation("org.mapstruct:mapstruct:$mapstructVersion")
+    implementation("io.micronaut:micronaut-management")
+    implementation("io.micronaut:micronaut-runtime")
+    implementation("io.micronaut.validation:micronaut-validation")
+    implementation("io.micronaut.data:micronaut-data-jdbc")
+    implementation("io.micronaut:micronaut-jackson-databind")
+    implementation("io.micronaut.security:micronaut-security")
+
+    implementation("io.micronaut.flyway:micronaut-flyway")
+    implementation("io.micronaut.sql:micronaut-jdbc-hikari")
+
+    implementation("io.confluent:kafka-json-schema-serializer:$kafkaJsonSchemaSerializerVersion")
+
+    // temporarily forcing these dependencies version bumps, until such time a more recent version of
+    // kafka-json-schema-serializer is released: when that happens, we should check if we can remove
+    // these as explicit dependencies and let them be transitively resolved once more
+    implementation("io.netty:netty-codec-http:4.1.113.Final")
+    // PandaPwn: https://github.com/advisories/GHSA-xpw8-rcwv-8f8p
+    implementation("io.netty:netty-codec-http2:4.1.113.Final")
+    // PandaPwn: https://github.com/advisories/GHSA-xpw8-rcwv-8f8p
+
+
+    implementation("com.datadoghq:java-dogstatsd-client:$datadogStatsDVersion")
+
+    implementation("org.apache.commons:commons-compress:1.26.2")
+    // PandaPwn: https://avd.aquasec.com/nvd/2024/cve-2024-25710/
+
+    implementation("org.apache.commons:commons-csv:$commonsCsvVersion")
+    implementation("org.apache.commons:commons-lang3:$commonsLangVersion")
+
+    implementation("org.flywaydb:flyway-database-postgresql")
+
+    implementation("javax.persistence:javax.persistence-api:2.2")
+
+    implementation("com.github.f4b6a3:uuid-creator:$uuidCreatorVersion")
+    implementation("com.google.auto.service:auto-service:1.1.1")
+
+    runtimeOnly("ch.qos.logback:logback-classic:$logbackClassicVersion")
+    runtimeOnly("net.logstash.logback:logstash-logback-encoder:$logstashLogbackEncoderVersion")
+    runtimeOnly("org.postgresql:postgresql:$postgresVersion")
+
+    compileOnly("org.projectlombok:lombok")
+
+    implementation("io.micronaut.cache:micronaut-cache-core")
+    implementation("io.micronaut:micronaut-http-client")
+
+    testAnnotationProcessor("io.micronaut.data:micronaut-data-processor")
+    testAnnotationProcessor("io.micronaut:micronaut-inject-java")
+    testAnnotationProcessor("io.micronaut:micronaut-inject-groovy")
+    testAnnotationProcessor("org.projectlombok:lombok")
+    testCompileOnly("org.projectlombok:lombok")
+
+    testImplementation("io.micronaut.flyway:micronaut-flyway")
+    testImplementation("io.micronaut.test:micronaut-test-junit5")
+    testImplementation("org.mockito:mockito-core")
+    testImplementation("org.mockito:mockito-junit-jupiter")
+    testImplementation("org.junit.jupiter:junit-jupiter-api")
+    testImplementation("org.junit.jupiter:junit-jupiter-params")
+    testImplementation("org.assertj:assertj-core")
+    testImplementation("org.testcontainers:junit-jupiter")
+    testImplementation("org.testcontainers:postgresql")
+    testImplementation("org.awaitility:awaitility:$awaitilityVersion")
+    testImplementation("org.testcontainers:testcontainers")
+    testImplementation("org.mockito:mockito-all:$mockitoAllVersion")
+}
+
+application {
+    mainClass.set("com.cabinparser.Application")
+}
+
+java {
+    sourceCompatibility = JavaVersion.toVersion("21")
+    targetCompatibility = JavaVersion.toVersion("21")
+}
+
+compileJava {
+    options.debug = true
+    options.debugOptions.debugLevel = 'source,lines,vars'
+}
+
+test {
+    jvmArgs '-XX:+EnableDynamicAgentLoading'
+
+    // log test output for tests
+    testLogging.showStandardStreams = true
+    testLogging.exceptionFormat = "full"
+    dependsOn checkstyleMain
+    dependsOn checkstyleTest
+
+    // use JUnit 5 platform
+    useJUnitPlatform()
+
+    finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+    reports.xml.required = true
+
+    // exclude auto-generated classes, constants, etc.. from jacoco reports
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+                    "**/config/*",
+                    "**/generated/**",
+            ])
+        }))
+    }
+}
+
+checkstyleMain {
+    source = 'src/main/java'
+}
+checkstyleTest {
+    source = 'src/test/java'
+}

@@ -1,0 +1,2 @@
+ALTER TABLE cabins
+    ADD COLUMN locality VARCHAR(255);

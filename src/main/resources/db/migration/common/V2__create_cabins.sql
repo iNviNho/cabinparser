@@ -1,0 +1,25 @@
+CREATE TABLE cabins
+(
+    id                     SERIAL PRIMARY KEY,
+    name                   VARCHAR(255)     NOT NULL,
+    url_fragment           VARCHAR(255)     NOT NULL,
+    vendor_unique_id       VARCHAR(36)      NOT NULL,
+    type                   VARCHAR(255)     NOT NULL,
+    bedrooms_count         INT              NOT NULL,
+    regular_sleeping_beds  INT              NOT NULL,
+    extra_sleeping_beds    INT              NOT NULL,
+    max_person             INT              NOT NULL,
+    rating                 DOUBLE PRECISION NOT NULL,
+    reviews_count          DOUBLE PRECISION NOT NULL,
+    avg_price_per_night    DECIMAL(8, 2)    NOT NULL,
+    price_type             VARCHAR(255)     NOT NULL,
+    gps_position_latitude  DOUBLE PRECISION NOT NULL,
+    gps_position_longitude DOUBLE PRECISION NOT NULL,
+    description            TEXT,
+    vendor                 VARCHAR(255)     NOT NULL,
+    images                 TEXT             NOT NULL,
+    last_calendar_update   timestamp        NOT NULL,
+    created_at             timestamp        NOT NULL,
+    created_when           timestamp        NOT NULL,
+    search_dump            json             NOT NULL
+);

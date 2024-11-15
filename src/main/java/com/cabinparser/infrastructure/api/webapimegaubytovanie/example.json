@@ -1,0 +1,15 @@
+{
+  "last_modified_when": "2024-10-09T12:36:04+02:00",
+  "checksum": "d28f5cd5818993c9a58ef6eb8af95c7e",
+  "blocked_accommodation_intervals": [
+    {
+      "blocking_from_date": "2024-09-12",
+      "blocking_to_date": "2024-09-14",
+      "free_sleeping_capacity": 0,
+      "free_bedrooms": 0,
+      "free_units": 0
+    }
+  ],
+  "blocked_accommodation_units_intervals": [],
+  "last_calendar_update_when": "2024-10-09T12:12:22+02:00"
+}

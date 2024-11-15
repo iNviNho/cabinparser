@@ -1,0 +1,489 @@
+{
+  "last_modified_when": "2024-10-10T21:37:10+02:00",
+  "checksum": "29ba2ed4ece84f8fd536777c384dddce",
+  "language": "sk",
+  "total_records_count": 3535,
+  "accommodations": [
+    {
+      "name": "Chata pod Starou Horou",
+      "url_fragment": "chata-pod-starou-horou",
+      "url_fragment_id": 18251,
+      "web_identifier": "mu-sk",
+      "id": 10292,
+      "gps_position": {
+        "latitude": 49.382739944739,
+        "longitude": 19.528764749676
+      },
+      "distance_meters": null,
+      "vip": false,
+      "top": true,
+      "created_when": "2022-12-21T23:48:48+01:00",
+      "last_calendar_update_when": "2024-10-10T18:12:31+02:00",
+      "multiple_accommodated_groups_allowed": false,
+      "basic_stats": {
+        "regular_beds_sleeping_capacity": 9,
+        "extra_beds_sleeping_capacity": 6,
+        "bedrooms_count": 3,
+        "toilets_count": 2,
+        "bathrooms_count": 2
+      },
+      "city_link": {
+        "name": "Trsten\u00e1",
+        "url_fragment": "trstena",
+        "url_fragment_id": 1162,
+        "web_identifier": "mu-sk",
+        "id": 1288,
+        "name_locative": "v Trstenej",
+        "location_type": "city",
+        "accommodations_count": 13,
+        "attractions_count": 1,
+        "identifier": "trstena"
+      },
+      "city_part_link": null,
+      "distance_meters_from_city": 6609,
+      "custom_city_part": null,
+      "placement": {
+        "id": 4,
+        "name": "v rekrea\u010dnej oblasti",
+        "active": true,
+        "features_group": "placements",
+        "short_name": "v rekrea\u010dnej oblasti",
+        "identifier": "in-the-recreation-area"
+      },
+      "placement_details": [
+        {
+          "id": 7,
+          "name": "pri lese \/  na okraji lesa",
+          "active": true,
+          "features_group": "placement-details",
+          "short_name": "pri lese \/  na okraji lesa",
+          "identifier": "near-the-forest-on-the-edge-of-the-fores"
+        },
+        {
+          "id": 9,
+          "name": "pri vode",
+          "active": true,
+          "features_group": "placement-details",
+          "short_name": "pri vode",
+          "identifier": "near-waterside"
+        },
+        {
+          "id": 13,
+          "name": "v chatovej osade",
+          "active": true,
+          "features_group": "placement-details",
+          "short_name": "v chatovej osade",
+          "identifier": "in-the-recreation-area"
+        },
+        {
+          "id": 226,
+          "name": "pri jazere",
+          "active": true,
+          "features_group": "placement-details",
+          "short_name": "pri jazere",
+          "identifier": "near-the-lake"
+        },
+        {
+          "id": 7308,
+          "name": "v pr\u00edrode",
+          "active": true,
+          "features_group": "placement-details",
+          "short_name": "v pr\u00edrode",
+          "identifier": "v-prirode"
+        }
+      ],
+      "images": [
+        {
+          "url": "https:\/\/cdn.megau.eu\/accommodations\/10292\/images\/a10292-chata-pod-starou-horou-20231213-010613-1884-1.jpg",
+          "file_size": 229193,
+          "mime_type": "image\/jpeg",
+          "width": 1024,
+          "height": 768,
+          "alt": "",
+          "caption": "3. Izba podkrovie s man\u017eelskou poste\u013eou + vybavenie chill tullivaky, komoda, stol\u010dek, no\u010dn\u00e9 stol\u00edky, lampi\u010dky, hojdacie kreslo, Smart telev\u00edzia + n\u00e1dhern\u00fd v\u00fdh\u013ead v\u0161etky izby s\u00fa kr\u00e1sne ale t\u00e1to je o\u010daruj\u00faca \ud83d\ude0d\ud83d\ude4f\ud83c\udffd",
+          "interior_image": true,
+          "exterior_image": false,
+          "surroundings_image": false,
+          "main_image_for_winter": true,
+          "main_image_for_summer": false,
+          "id": 572582
+        },
+        {
+          "url": "https:\/\/cdn.megau.eu\/accommodations\/10292\/images\/a10292-chata-pod-starou-horou-20231213-010613-5018.jpg",
+          "file_size": 183737,
+          "mime_type": "image\/jpeg",
+          "width": 768,
+          "height": 1024,
+          "alt": "",
+          "caption": "Krb v ob\u00fdvacej miestnosti spojen\u00fd s jed\u00e1l\u0148ou",
+          "interior_image": true,
+          "exterior_image": false,
+          "surroundings_image": false,
+          "main_image_for_winter": false,
+          "main_image_for_summer": false,
+          "id": 572532
+        },
+        {
+          "url": "https:\/\/cdn.megau.eu\/accommodations\/10292\/images\/a10292-chata-pod-starou-horou-20231213-010613-3022.jpg",
+          "file_size": 172888,
+          "mime_type": "image\/jpeg",
+          "width": 1024,
+          "height": 768,
+          "alt": "",
+          "caption": "Ob\u00fdvacia miestnos\u0165 spojen\u00e1 s jed\u00e1l\u0148ou",
+          "interior_image": true,
+          "exterior_image": false,
+          "surroundings_image": false,
+          "main_image_for_winter": false,
+          "main_image_for_summer": false,
+          "id": 572518
+        },
+        {
+          "url": "https:\/\/cdn.megau.eu\/accommodations\/10292\/images\/a10292-chata-pod-starou-horou-20231213-010613-5141.jpg",
+          "file_size": 167805,
+          "mime_type": "image\/jpeg",
+          "width": 1024,
+          "height": 768,
+          "alt": "",
+          "caption": "Jed\u00e1le\u0148, krb spojen\u00e1 s ob\u00fdvaciu miestnos\u0165ou",
+          "interior_image": true,
+          "exterior_image": false,
+          "surroundings_image": false,
+          "main_image_for_winter": false,
+          "main_image_for_summer": false,
+          "id": 572546
+        },
+        {
+          "url": "https:\/\/cdn.megau.eu\/accommodations\/10292\/images\/a10292-chata-pod-starou-horou-20231213-010613-9627.jpg",
+          "file_size": 110603,
+          "mime_type": "image\/jpeg",
+          "width": 768,
+          "height": 1024,
+          "alt": "",
+          "caption": "Kuchy\u0148a s prechodom do jed\u00e1lne a ob\u00fdvacej miestnosti",
+          "interior_image": true,
+          "exterior_image": false,
+          "surroundings_image": false,
+          "main_image_for_winter": false,
+          "main_image_for_summer": false,
+          "id": 572521
+        }
+      ],
+      "rating_and_reviews": {
+        "reviews_enabled": true,
+        "rating": {
+          "cleanliness": 10,
+          "equipment": 10,
+          "services": 10,
+          "personnel": 10,
+          "location": 10,
+          "activities": 10,
+          "price_quality_ratio": 10,
+          "average": 10
+        },
+        "active_reviews_count": 26,
+        "ratings_range_name": "V\u00fdnimo\u010dn\u00e9"
+      },
+      "accommodation_price_range": {
+        "price_from": 250,
+        "price_to": 650,
+        "currency": "EUR",
+        "price_type": "per-stay-and-night"
+      },
+      "description": "Na\u0161a Chata pod Starou Horou sa nach\u00e1dza len pribli\u017ene 1 km od Oravskej priehrady, na tichom mieste pod horou Magurka. Pr\u00e1ve t\u00e1 je ide\u00e1lnym miestom pre hub\u00e1r\u010denie, prech\u00e1dzky na \u010distom oravskom vzduchu, v lete na cyklistiku, v zime na be\u017ekovanie. Chata je ide\u00e1lna pre pobyty rod\u00edn, skupiniek priate\u013eov, kolegov a samozrejme turisto...",
+      "catchphrase": "Na akcie s rodinou i kolegami, wellness",
+      "promotion_text": "",
+      "show_promotion_from_date": null,
+      "show_promotion_to_date": null,
+      "hotel_stars_count": null,
+      "accommodation_units": [
+        {
+          "name": "\u0160tvorl\u00f4\u017ekov\u00e1 izba",
+          "custom_name": null,
+          "unit_type": {
+            "id": 30,
+            "name": "Izba",
+            "active": true,
+            "identifier": "room",
+            "show_bedrooms_count_by_name": false,
+            "show_beds_count_by_name": true,
+            "name_locative": "v izbe"
+          },
+          "owner_defined_beds_count": 3,
+          "units_count": 1,
+          "bedrooms_count": 1,
+          "sleeping_capacity": 4,
+          "other_rooms_counts": [],
+          "regular_beds": [
+            {
+              "same_beds_count": 1,
+              "single_bed_sleeping_capacity": 2,
+              "outside_room_location": null,
+              "regular_bed_type": {
+                "id": 2002,
+                "name": "Man\u017eelsk\u00e1 poste\u013e",
+                "active": true,
+                "features_group": "regular-bed-types",
+                "short_name": "Man\u017eelsk\u00e1 poste\u013e",
+                "identifier": "double-bed"
+              },
+              "merge_possible": false,
+              "split_possible": false
+            },
+            {
+              "same_beds_count": 1,
+              "single_bed_sleeping_capacity": 1,
+              "outside_room_location": null,
+              "regular_bed_type": {
+                "id": 2001,
+                "name": "Jednol\u00f4\u017ekov\u00e1 poste\u013e",
+                "active": true,
+                "features_group": "regular-bed-types",
+                "short_name": "Jednol\u00f4\u017ekov\u00e1 poste\u013e",
+                "identifier": "single-bed"
+              },
+              "merge_possible": false,
+              "split_possible": false
+            }
+          ],
+          "extra_beds": [
+            {
+              "same_beds_count": 1,
+              "single_bed_sleeping_capacity": 1,
+              "outside_room_location": null,
+              "extra_bed_type": {
+                "id": 1005,
+                "name": "v\u00fdsuvn\u00e9 l\u00f4\u017eko",
+                "active": true,
+                "features_group": "extra-bed-types",
+                "short_name": "v\u00fdsuvn\u00e9 l\u00f4\u017eko",
+                "identifier": "trundle-bed"
+              }
+            }
+          ],
+          "id": 29958
+        },
+        {
+          "name": "\u0160tvorl\u00f4\u017ekov\u00e1 izba",
+          "custom_name": null,
+          "unit_type": {
+            "id": 30,
+            "name": "Izba",
+            "active": true,
+            "identifier": "room",
+            "show_bedrooms_count_by_name": false,
+            "show_beds_count_by_name": true,
+            "name_locative": "v izbe"
+          },
+          "owner_defined_beds_count": 3,
+          "units_count": 1,
+          "bedrooms_count": 1,
+          "sleeping_capacity": 4,
+          "other_rooms_counts": [],
+          "regular_beds": [
+            {
+              "same_beds_count": 1,
+              "single_bed_sleeping_capacity": 2,
+              "outside_room_location": null,
+              "regular_bed_type": {
+                "id": 2002,
+                "name": "Man\u017eelsk\u00e1 poste\u013e",
+                "active": true,
+                "features_group": "regular-bed-types",
+                "short_name": "Man\u017eelsk\u00e1 poste\u013e",
+                "identifier": "double-bed"
+              },
+              "merge_possible": false,
+              "split_possible": true
+            },
+            {
+              "same_beds_count": 1,
+              "single_bed_sleeping_capacity": 1,
+              "outside_room_location": null,
+              "regular_bed_type": {
+                "id": 2001,
+                "name": "Jednol\u00f4\u017ekov\u00e1 poste\u013e",
+                "active": true,
+                "features_group": "regular-bed-types",
+                "short_name": "Jednol\u00f4\u017ekov\u00e1 poste\u013e",
+                "identifier": "single-bed"
+              },
+              "merge_possible": false,
+              "split_possible": false
+            }
+          ],
+          "extra_beds": [
+            {
+              "same_beds_count": 1,
+              "single_bed_sleeping_capacity": 1,
+              "outside_room_location": null,
+              "extra_bed_type": {
+                "id": 1005,
+                "name": "v\u00fdsuvn\u00e9 l\u00f4\u017eko",
+                "active": true,
+                "features_group": "extra-bed-types",
+                "short_name": "v\u00fdsuvn\u00e9 l\u00f4\u017eko",
+                "identifier": "trundle-bed"
+              }
+            }
+          ],
+          "id": 29956
+        },
+        {
+          "name": "P\u00e4\u0165l\u00f4\u017ekov\u00e1 izba",
+          "custom_name": null,
+          "unit_type": {
+            "id": 30,
+            "name": "Izba",
+            "active": true,
+            "identifier": "room",
+            "show_bedrooms_count_by_name": false,
+            "show_beds_count_by_name": true,
+            "name_locative": "v izbe"
+          },
+          "owner_defined_beds_count": 3,
+          "units_count": 1,
+          "bedrooms_count": 1,
+          "sleeping_capacity": 5,
+          "other_rooms_counts": [],
+          "regular_beds": [
+            {
+              "same_beds_count": 1,
+              "single_bed_sleeping_capacity": 1,
+              "outside_room_location": null,
+              "regular_bed_type": {
+                "id": 2001,
+                "name": "Jednol\u00f4\u017ekov\u00e1 poste\u013e",
+                "active": true,
+                "features_group": "regular-bed-types",
+                "short_name": "Jednol\u00f4\u017ekov\u00e1 poste\u013e",
+                "identifier": "single-bed"
+              },
+              "merge_possible": false,
+              "split_possible": false
+            },
+            {
+              "same_beds_count": 1,
+              "single_bed_sleeping_capacity": 2,
+              "outside_room_location": null,
+              "regular_bed_type": {
+                "id": 2002,
+                "name": "Man\u017eelsk\u00e1 poste\u013e",
+                "active": true,
+                "features_group": "regular-bed-types",
+                "short_name": "Man\u017eelsk\u00e1 poste\u013e",
+                "identifier": "double-bed"
+              },
+              "merge_possible": false,
+              "split_possible": false
+            }
+          ],
+          "extra_beds": [
+            {
+              "same_beds_count": 2,
+              "single_bed_sleeping_capacity": 1,
+              "outside_room_location": null,
+              "extra_bed_type": {
+                "id": 1005,
+                "name": "v\u00fdsuvn\u00e9 l\u00f4\u017eko",
+                "active": true,
+                "features_group": "extra-bed-types",
+                "short_name": "v\u00fdsuvn\u00e9 l\u00f4\u017eko",
+                "identifier": "trundle-bed"
+              }
+            }
+          ],
+          "id": 29957
+        }
+      ],
+      "shared_rooms": [
+        {
+          "same_rooms_count": 1,
+          "room_type": {
+            "id": 2,
+            "name": "Spolo\u010densk\u00e1 alebo ob\u00fdvacia miestnos\u0165",
+            "active": true,
+            "identifier": "common-or-living-room"
+          },
+          "room_subtype": {
+            "id": 25,
+            "name": "Ob\u00fdvacia miestnos\u0165",
+            "active": true,
+            "identifier": "living-room"
+          },
+          "regular_beds": [],
+          "extra_beds": [
+            {
+              "same_beds_count": 2,
+              "single_bed_sleeping_capacity": 1,
+              "outside_room_location": null,
+              "extra_bed_type": {
+                "id": 1001,
+                "name": "gau\u010d",
+                "active": true,
+                "features_group": "extra-bed-types",
+                "short_name": "gau\u010d",
+                "identifier": "couch"
+              }
+            }
+          ],
+          "id": 298208
+        },
+        {
+          "same_rooms_count": 1,
+          "room_type": {
+            "id": 3,
+            "name": "Kuchy\u0148a",
+            "active": true,
+            "identifier": "kitchen"
+          },
+          "room_subtype": {
+            "id": 23,
+            "name": "Kuchy\u0148a",
+            "active": true,
+            "identifier": "kitchen"
+          },
+          "regular_beds": [],
+          "extra_beds": [],
+          "id": 298209
+        },
+        {
+          "same_rooms_count": 1,
+          "room_type": {
+            "id": 4,
+            "name": "K\u00fape\u013e\u0148a alebo toaleta",
+            "active": true,
+            "identifier": "bathroom-or-toilet"
+          },
+          "room_subtype": {
+            "id": 20,
+            "name": "K\u00fape\u013e\u0148a s toaletou",
+            "active": true,
+            "identifier": "bathroom-with-toilet"
+          },
+          "regular_beds": [],
+          "extra_beds": [],
+          "id": 298210
+        },
+        {
+          "same_rooms_count": 1,
+          "room_type": {
+            "id": 4,
+            "name": "K\u00fape\u013e\u0148a alebo toaleta",
+            "active": true,
+            "identifier": "bathroom-or-toilet"
+          },
+          "room_subtype": {
+            "id": 20,
+            "name": "K\u00fape\u013e\u0148a s toaletou",
+            "active": true,
+            "identifier": "bathroom-with-toilet"
+          },
+          "regular_beds": [],
+          "extra_beds": [],
+          "id": 298211
+        }
+      ]
+    }
+  ]
+}
