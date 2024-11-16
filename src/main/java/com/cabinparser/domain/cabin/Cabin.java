@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
+import java.util.Optional;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -63,7 +64,7 @@ public class Cabin {
   }
 
   public boolean isSlovakCabin() {
-    return country.equals("SK");
+    return Optional.ofNullable(country).isPresent() && country.equals("SK");
   }
 
   public Integer getAccommodationUnitId() {

@@ -11,6 +11,7 @@
           <th>Lokalita</th>
           <th>Cena za noc</th>
           <th>Obsadenost</th>
+          <th>Mesacny prijem</th>
         </tr>
         <tr v-for="cabin in data" :key="cabin.name">
           <td class="fix-name-column">
@@ -24,6 +25,10 @@
           <td>{{ cabin.locality }}</td>
           <td>{{ cabin.avgPricePerNight }}€</td>
           <td>{{ cabin.occupancy != null ? (cabin.occupancy * 100).toFixed(2) + '%' : '-' }}</td>
+          <td>{{
+              cabin.occupancy != null ? (cabin.avgPricePerNight * cabin.occupancy * 30).toFixed(2) + '€' : '-'
+            }}
+          </td>
         </tr>
       </table>
     </div>

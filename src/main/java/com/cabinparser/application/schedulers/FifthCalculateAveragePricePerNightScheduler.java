@@ -6,6 +6,7 @@ import com.cabinparser.domain.cabin.CabinRepository;
 import com.cabinparser.domain.cabin.CabinService;
 import com.cabinparser.infrastructure.api.webapimegaubytovanie.CabinPriceListResponse;
 import com.cabinparser.infrastructure.api.webapimegaubytovanie.WebApiMegaubytovanieApiClient;
+import io.micronaut.scheduling.annotation.Scheduled;
 import jakarta.inject.Singleton;
 import java.time.Duration;
 import java.time.LocalDate;
@@ -16,7 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 @Singleton
 @Slf4j
 @AllArgsConstructor
-public class CalculateAveragePricePerNightScheduler {
+public class FifthCalculateAveragePricePerNightScheduler {
 
   CabinRepository cabinRepository;
 
@@ -24,7 +25,7 @@ public class CalculateAveragePricePerNightScheduler {
 
   WebApiMegaubytovanieApiClient webApiMegaubytovanieApiClient;
 
-  // @Scheduled(initialDelay = "1s", fixedDelay = "1d")
+  @Scheduled(initialDelay = "1s", fixedDelay = "1d")
   void handle() {
     final List<Cabin> cabins = cabinRepository.getByVendor(Constants.MEGAUBYTOVANIE);
     cabins.forEach(cabin -> {

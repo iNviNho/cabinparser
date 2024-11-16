@@ -4,7 +4,12 @@ micronaut:
   server:
     port: 8085
     cors:
-      enabled: false
+      enabled: true
+      configuration:
+        allowedOrigins: "*"
+        allowedMethods: "*"
+        allowedHeaders: "*"
+        allowCredentials: true
   http:
     client:
       read-idle-timeout: 30m

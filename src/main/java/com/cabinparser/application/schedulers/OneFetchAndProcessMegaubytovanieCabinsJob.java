@@ -20,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Singleton
 @RequiredArgsConstructor
-public class FetchAndProcessMegaubytovanieCabinsJob {
+public class OneFetchAndProcessMegaubytovanieCabinsJob {
   protected ObjectMapper objectMapper = new ObjectMapper();
   @NonNull
   protected WebApiMegaubytovanieApiClient webApiMegaubytovanieApiClient;
@@ -57,7 +57,7 @@ public class FetchAndProcessMegaubytovanieCabinsJob {
       processPage(response, type);
 
       offset += limit;
-      Thread.sleep(Duration.ofSeconds(1));
+      Thread.sleep(Duration.ofMillis(250));
     } while (!response.accommodations().isEmpty());
   }
 

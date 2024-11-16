@@ -19,7 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Singleton
 @AllArgsConstructor
-public class UpdateMegaubytovanieCabinOccupancyJob {
+public class TwoUpdateMegaubytovanieCabinOccupancyJob {
 
   private CabinService cabinService;
 

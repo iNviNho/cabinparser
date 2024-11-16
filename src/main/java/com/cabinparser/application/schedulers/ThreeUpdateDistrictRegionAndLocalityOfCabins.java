@@ -17,7 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Singleton
-public class UpdateDistrictRegionAndLocalityOfCabins {
+public class ThreeUpdateDistrictRegionAndLocalityOfCabins {
 
   protected ObjectMapper objectMapper = new ObjectMapper();
   @Inject
