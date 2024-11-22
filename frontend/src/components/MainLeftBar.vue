@@ -2,47 +2,39 @@
   <div>
     <div class="inline-block">
       <h3>Kraj</h3>
-      <select v-model="selectedRegion" @change="onRegionChange">
-        <option v-for="region in regions" :key="region" :value="region">{{ region }}</option>
-      </select>
+      <multiselect v-model="selectedRegion" :hideSelected="true" :options="regions" :placeholder="'Vyber'"
+                   :selectLabel="''" multiple @remove="onRegionChange" @select="onRegionChange"></multiselect>
     </div>
     <div class="inline-block">
       <h3>Okres</h3>
-      <select v-model="selectedDistrict" :disabled="selectedRegion == null"
-              @change="onDistrictChange">
-        <option v-for="district in districts" :key="district" :value="district">{{ district }}</option>
-      </select>
+      <multiselect v-model="selectedDistrict" :disabled="selectedRegion == null || selectedRegion.length < 1"
+                   :hideSelected="true" :options="districts"
+                   :placeholder="'Vyber'"
+                   :selectLabel="''" multiple @remove="onDistrictChange" @select="onDistrictChange"></multiselect>
     </div>
     <div class="inline-block">
       <h3>Lokalita</h3>
-      <select v-model="selectedLocality" :disabled="selectedDistrict == null"
-              @change="filtersChanged">
-        <option v-for="locality in localities" :key="locality" :value="locality">{{ locality }}</option>
-      </select>
+      <multiselect v-model="selectedLocality" :disabled="selectedDistrict == null || selectedDistrict.length < 1"
+                   :hideSelected="true" :options="localities"
+                   :placeholder="'Vyber'"
+                   :selectLabel="''" multiple @remove="filtersChanged" @select="filtersChanged"></multiselect>
     </div>
     <div class="inline-block">
-      <h3>Rating nad</h3>
-      <select v-model="selectedRating" @change="filtersChanged">
-        <option v-for="rating in ratings" :key="rating" :value="rating">{{ rating }}</option>
-      </select>
+      <h3 style="margin-bottom: 50px;">Rating</h3>
+      <Slider v-model="selectedRating" :format="'decimals'" :max="10" :min="0" :step="0.5" @change="ratingChanged"/>
     </div>
     <div class="inline-block">
-      <h3>Hodnotenia nad</h3>
-      <select v-model="selectedReview" @change="filtersChanged">
-        <option v-for="review in reviews" :key="review" :value="review">{{ review }}</option>
-      </select>
+      <h3 style="margin-top: 20px; margin-bottom: 50px;">Hodnotenia</h3>
+      <Slider v-model="selectedReview" :format="'decimals'" :max="200" :min="0" :step="5" @change="reviewChanged"/>
     </div>
     <div class="inline-block">
-      <h3>Cena za noc nad</h3>
-      <select v-model="selectedPrice" @change="filtersChanged">
-        <option v-for="price in prices" :key="price" :value="price">{{ price }}</option>
-      </select>
+      <h3 style="margin-top: 20px; margin-bottom: 50px;">Cena za noc</h3>
+      <Slider v-model="selectedPrice" :format="formatPrice" :max="2500" :min="0" :step="50" @change="priceChanged"/>
     </div>
     <div class="inline-block">
-      <h3>Obsadenost nad</h3>
-      <select v-model="selectedOccupancy" @change="filtersChanged">
-        <option v-for="occupancy in occupancies" :key="occupancy" :value="occupancy">{{ occupancy }}%</option>
-      </select>
+      <h3 style="margin-top: 20px; margin-bottom: 50px;">Obsadenost</h3>
+      <Slider v-model="selectedOccupancy" :format="formatPercentage" :max="100" :min="0"
+              :step="5" @change="occupancyChanged"/>
     </div>
   </div>
 </template>
@@ -50,14 +42,20 @@
 <script>
 
 import client from "@/services/client";
+import Multiselect from 'vue-multiselect'
+import Slider from '@vueform/slider'
 
 export default {
   name: 'MainLeftBar',
+  components: {
+    Multiselect,
+    Slider
+  },
   data() {
     return {
-      regions: ["All"],
-      districts: ["All"],
-      localities: ["All"],
+      regions: [],
+      districts: [],
+      localities: [],
       ratings: ["All", 8, 8.5, 9, 9.5, 10],
       reviews: ["All", 5, 20, 50, 75, 100],
       prices: ["All", 50, 100, 150, 200, 300, 400, 500, 750, 1000],
@@ -65,52 +63,57 @@ export default {
       selectedRegion: null,
       selectedDistrict: null,
       selectedLocality: null,
-      selectedRating: null,
-      selectedReview: null,
-      selectedPrice: null,
-      selectedOccupancy: null
+      selectedRating: [0, 10],
+      selectedReview: [0, 200],
+      selectedPrice: [0, 2500],
+      selectedOccupancy: [0, 100]
     }
   },
   methods: {
+    ratingChanged(selectedRating) {
+      this.selectedRating = selectedRating;
+      this.filtersChanged();
+    },
+    reviewChanged(selectedReview) {
+      this.selectedReview = selectedReview;
+      this.filtersChanged();
+    },
+    priceChanged(selectedPrice) {
+      this.selectedPrice = selectedPrice;
+      this.filtersChanged();
+    },
+    occupancyChanged(selectedOccupancy) {
+      this.selectedOccupancy = selectedOccupancy;
+      this.filtersChanged();
+    },
+    formatPercentage(value) {
+      return value + '%';
+    },
+    formatPrice(value) {
+      return value.toFixed(0) + '€';
+    },
     onRegionChange() {
-      // if region is not 'All', make another call to get districts
-      if (this.selectedRegion !== 'All') {
-        client.get(`/locations/districts?region=${this.selectedRegion}`)
-            .then(response => {
-              this.districts = response.data;
-              // add 'All' option
-              this.districts.unshift('All');
-              this.selectedDistrict = null;
-              this.selectedLocality = null;
-              this.filtersChanged();
-            })
-            .catch(error => {
-              console.log(error);
-            });
-      } else {
-        this.districts = [];
-        this.selectedDistrict = null;
-        this.filtersChanged();
-      }
+      client.get(`/locations/districts?region=${this.selectedRegion}`)
+          .then(response => {
+            this.districts = response.data;
+            this.selectedDistrict = null;
+            this.selectedLocality = null;
+            this.filtersChanged();
+          })
+          .catch(error => {
+            console.log(error);
+          });
     },
     onDistrictChange() {
-      if (this.selectedDistrict !== 'All') {
-        client.get(`/locations/localities?region=${this.selectedRegion}&district=${this.selectedDistrict}`)
-            .then(response => {
-              this.localities = response.data;
-              // add 'All' option
-              this.localities.unshift('All');
-              this.selectedLocality = null;
-              this.filtersChanged();
-            })
-            .catch(error => {
-              console.log(error);
-            });
-      } else {
-        3
-        this.selectedLocality = null;
-        this.filtersChanged();
-      }
+      client.get(`/locations/localities?region=${this.selectedRegion}&district=${this.selectedDistrict}`)
+          .then(response => {
+            this.localities = response.data;
+            this.selectedLocality = null;
+            this.filtersChanged();
+          })
+          .catch(error => {
+            console.log(error);
+          });
     },
     filtersChanged() {
       this.$emit('filters-changed', {
@@ -128,8 +131,7 @@ export default {
     client.get('/locations/regions')
         .then(response => {
           this.regions = response.data;
-          // add 'All' option
-          this.regions.unshift('All');
+          this.filtersChanged();
         })
         .catch(error => {
           console.log(error);
@@ -139,6 +141,10 @@ export default {
 
 </script>
 
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
+<style>
+@import "~@vueform/slider/themes/default.css";
+</style>
 <style scoped>
 
 .inline-block {

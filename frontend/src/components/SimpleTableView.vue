@@ -12,6 +12,7 @@
         </tr>
       </table>
     </div>
+    <hr style="clear: both;"/>
   </div>
 </template>
 

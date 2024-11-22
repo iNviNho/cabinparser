@@ -6,6 +6,7 @@ import com.cabinparser.domain.cabin.CabinService;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
 import jakarta.annotation.security.PermitAll;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
@@ -30,7 +31,7 @@ public class LocationsController {
   public List<String> getDistricts(final String region) {
     return cabinService.getSlovakCabinsByVendor(Constants.MEGAUBYTOVANIE)
       .stream()
-      .filter(cabin -> cabin.getRegion().equals(region))
+      .filter(cabin -> Arrays.stream(region.split(",")).anyMatch(cabin.getRegion()::contains))
       .map(Cabin::getDistrict)
       .distinct()
       .collect(Collectors.toList());
@@ -40,8 +41,8 @@ public class LocationsController {
   public List<String> getLocalities(final String region, final String district) {
     return cabinService.getSlovakCabinsByVendor(Constants.MEGAUBYTOVANIE)
       .stream()
-      .filter(cabin -> cabin.getRegion().equals(region))
-      .filter(cabin -> cabin.getDistrict().equals(district))
+      .filter(cabin -> Arrays.stream(region.split(",")).anyMatch(cabin.getRegion()::contains))
+      .filter(cabin -> Arrays.stream(district.split(",")).anyMatch(cabin.getDistrict()::contains))
       .map(Cabin::getLocality)
       .distinct()
       .collect(Collectors.toList());

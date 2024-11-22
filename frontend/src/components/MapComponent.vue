@@ -3,7 +3,7 @@
     <GMapMap
         :center="{ lat: 48.669, lng: 19.699 }"
         :zoom="8"
-        style="width: 100%; height: 400px"
+        style="width: 100%; height: 500px"
     >
       <GMapMarker
           v-for="(marker, index) in markers"

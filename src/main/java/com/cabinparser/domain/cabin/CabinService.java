@@ -1,6 +1,8 @@
 package com.cabinparser.domain.cabin;
 
 import com.cabinparser.infrastructure.api.webapimegaubytovanie.CabinPriceListResponse;
+import io.micronaut.cache.annotation.CacheConfig;
+import io.micronaut.cache.annotation.Cacheable;
 import jakarta.inject.Singleton;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -14,6 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 @Singleton
 @Slf4j
 @AllArgsConstructor
+@CacheConfig(value = "cabins")
 public class CabinService {
 
   private final CabinRepository cabinRepository;
@@ -43,6 +46,7 @@ public class CabinService {
     return cabinRepository.getByVendor(vendor);
   }
 
+  @Cacheable
   public List<Cabin> getSlovakCabinsByVendor(final String vendor) {
     return cabinRepository.getByVendor(vendor)
       .stream().filter(Cabin::isSlovakCabin)

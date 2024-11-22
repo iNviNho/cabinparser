@@ -3,7 +3,6 @@ package com.cabinparser.application.schedulers;
 import com.cabinparser.application.Constants;
 import com.cabinparser.domain.cabin.CabinService;
 import com.cabinparser.domain.cabinocupancy.CabinOccupancyService;
-import io.micronaut.scheduling.annotation.Scheduled;
 import jakarta.inject.Singleton;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -24,7 +23,7 @@ public class FourOccupancyCalculateScheduler {
 
   LocalDate cabinParserStartDate = LocalDate.of(2024, 10, 1);
 
-  @Scheduled(initialDelay = "1s")
+  // @Scheduled(initialDelay = "1s")
   public void calculateOccupancy() {
     log.info("Calculating occupancy");
     cabinService.getSlovakCabinsByVendor(Constants.MEGAUBYTOVANIE).forEach(cabin -> {

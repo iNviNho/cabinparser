@@ -54,3 +54,8 @@ flyway:
 
 google:
   api-key: "SET_ME"
+
+ehcache:
+  caches:
+    cabins:
+      enabled: true

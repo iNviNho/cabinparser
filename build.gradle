@@ -94,6 +94,8 @@ dependencies {
     implementation("com.github.f4b6a3:uuid-creator:$uuidCreatorVersion")
     implementation("com.google.auto.service:auto-service:1.1.1")
 
+    implementation("io.micronaut.cache:micronaut-cache-ehcache")
+
     runtimeOnly("ch.qos.logback:logback-classic:$logbackClassicVersion")
     runtimeOnly("net.logstash.logback:logstash-logback-encoder:$logstashLogbackEncoderVersion")
     runtimeOnly("org.postgresql:postgresql:$postgresVersion")
