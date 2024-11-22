@@ -1,6 +1,6 @@
 <template>
   <div id="left-bar">
-    <h2>Cabin Parser</h2>
+    <h2>Chatkovač</h2>
     <div class="white-section"></div>
     <MainLeftBar @filters-changed="filtersChanged"></MainLeftBar>
   </div>

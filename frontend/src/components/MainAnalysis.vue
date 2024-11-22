@@ -40,6 +40,13 @@
             @click="changeActiveComponent('pricePerNight')">Cena za osobu/noc
         </li>
         <br style="clear: both;">
+        <li :class="activeComponent === 'occupancyPerCabinSize' ? 'active' : ''"
+            @click="changeActiveComponent('occupancyPerCabinSize')">Obsadenost podla poctu izieb
+        </li>
+        <li :class="activeComponent === 'occupancyPerCabinRegularSleepingBeds' ? 'active' : ''"
+            @click="changeActiveComponent('occupancyPerCabinRegularSleepingBeds')">Obsadenost podla poctu posteli
+        </li>
+        <br style="clear: both;">
       </ul>
     </div>
     <div class="main-analysis-content">
@@ -48,7 +55,8 @@
         >{{ option }}
         </option>
       </select>
-      <select id="desiredGroupedBySelect" v-model="desiredGroupBy" @change="updateTopCabins(this.cabins)">
+      <select v-if="componentsThatNeedGroupBy.includes(activeComponent)" id="desiredGroupedBySelect"
+              v-model="desiredGroupBy" @change="updateTopCabins(this.cabins)">
         <option v-for="option in desiredGroupByOptions" :key="option" :value="option"
         >{{ option }}
         </option>
@@ -91,6 +99,14 @@
                        :data="pricePerNight"
                        :keyName="desiredGroupBy"
                        :valueName="'Cena'"></SimpleTableView>
+      <SimpleTableView v-if="activeComponent === 'occupancyPerCabinSize'"
+                       :data="occupancyPerCabinSize"
+                       :keyName="'Pocet izieb'"
+                       :valueName="'Obsadenost'"></SimpleTableView>
+      <SimpleTableView v-if="activeComponent === 'occupancyPerCabinRegularSleepingBeds'"
+                       :data="occupancyPerCabinRegularSleepingBeds"
+                       :keyName="'Pocet posteli'"
+                       :valueName="'Obsadenost'"></SimpleTableView>
     </div>
   </div>
 </template>
@@ -109,6 +125,7 @@ export default {
       activeComponent: 'topCabinsByRating',
       cabins: [],
       desiredResultSizeOptions: [5, 10, 25, 50, 100],
+      componentsThatNeedGroupBy: ['cabinsCount', 'dailyVisits', 'dailyCapacity', 'occupancy', 'monthlyIncome', 'pricePerNight'],
       desiredGroupByOptions: ['Region', 'Okres', 'Lokalita'],
       desiredResultSize: 25,
       desiredGroupBy: 'Region',
@@ -124,6 +141,8 @@ export default {
       occupancy: [],
       monthlyIncome: [],
       pricePerNight: [],
+      occupancyPerCabinSize: [],
+      occupancyPerCabinRegularSleepingBeds: [],
     }
   },
   methods: {
@@ -220,6 +239,40 @@ export default {
           .map(([key, value]) => ({key, value: (value.pricePerNight / value.count).toFixed(2)}))
           .sort((a, b) => b.value - a.value)
           .map(({key, value}) => ({key, value: value + '€'}))
+          .slice(0, this.desiredResultSize);
+      this.occupancyPerCabinSize = Object.entries(cabins.reduce((acc, cabin) => {
+        const key = cabin.bedroomsCount;
+
+        if (cabin.occupancy === 0 || cabin.occupancy === undefined) {
+          return acc;
+        }
+
+        acc[key] = acc[key] ? {
+          occupancy: acc[key].occupancy + cabin.occupancy,
+          count: acc[key].count + 1
+        } : {occupancy: cabin.occupancy, count: 1};
+        return acc;
+      }, {}))
+          .map(([key, value]) => ({key, value: (value.occupancy / value.count * 100).toFixed(2)}))
+          .sort((a, b) => b.value - a.value)
+          .map(({key, value}) => ({key, value: value + '%'}))
+          .slice(0, this.desiredResultSize);
+      this.occupancyPerCabinRegularSleepingBeds = Object.entries(cabins.reduce((acc, cabin) => {
+        const key = cabin.regularSleepingBeds;
+
+        if (cabin.occupancy === 0 || cabin.occupancy === undefined) {
+          return acc;
+        }
+
+        acc[key] = acc[key] ? {
+          occupancy: acc[key].occupancy + cabin.occupancy,
+          count: acc[key].count + 1
+        } : {occupancy: cabin.occupancy, count: 1};
+        return acc;
+      }, {}))
+          .map(([key, value]) => ({key, value: (value.occupancy / value.count * 100).toFixed(2)}))
+          .sort((a, b) => b.value - a.value)
+          .map(({key, value}) => ({key, value: value + '%'}))
           .slice(0, this.desiredResultSize);
     },
     getKey(desiredGroupBy, cabin) {
