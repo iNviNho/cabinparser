@@ -1,5 +1,6 @@
 package com.cabinparser.domain.cabin;
 
+import com.cabinparser.infrastructure.api.webapimegaubytovanie.AccommodationDetailResponse;
 import com.cabinparser.infrastructure.api.webapimegaubytovanie.CabinPriceListResponse;
 import io.micronaut.cache.annotation.CacheConfig;
 import io.micronaut.cache.annotation.Cacheable;
@@ -7,6 +8,7 @@ import jakarta.inject.Singleton;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -182,6 +184,36 @@ public class CabinService {
     log.info("Updated average price per night for cabin {} to {}",
       cabin.getName(),
       averagePricePerNight);
+  }
+
+  public void processAccommodationDetailResponse(final AccommodationDetailResponse response, final Cabin cabin) {
+    final List<CabinAttributes> att = new ArrayList<>();
+    processItems(response.accommodation_detail().properties_and_equipment().equipment().equipments_for_children(), att);
+    processItems(response.accommodation_detail().properties_and_equipment().equipment().exterior_equipments(), att);
+    processItems(response.accommodation_detail().properties_and_equipment().equipment().additional_services(), att);
+    processItems(response.accommodation_detail().properties_and_equipment().equipment().social_spaces(), att);
+    processItems(response.accommodation_detail().properties_and_equipment().equipment().relax_opportunities(), att);
+    processItems(response.accommodation_detail().properties_and_equipment().equipment().sport_opportunities(), att);
+    processItems(response.accommodation_detail().properties_and_equipment().equipment().agro_tourism_options(), att);
+    // convert att to json and store to setAttributes
+    cabin.setAttributes(att);
+    cabinRepository.update(cabin);
+
+    log.info("Updated attributes for cabin {}", cabin.getName());
+  }
+
+  protected void processItems(final List<AccommodationDetailResponse.PropertiesAndEquipment.Equipment.Item> items,
+                              final List<CabinAttributes> att) {
+    items.forEach(item -> {
+      if (item.active()) {
+        att.add(
+          new CabinAttributes(
+            item.identifier(),
+            item.name()
+          )
+        );
+      }
+    });
   }
 
 }

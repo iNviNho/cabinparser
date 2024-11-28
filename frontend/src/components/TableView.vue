@@ -6,7 +6,7 @@
           <th class="fix-name-column">Nazov</th>
           <th>Rating</th>
           <th>Hodnotenia</th>
-          <th>Kraj</th>
+          <th class="fix-region-column">Kraj</th>
           <th>Okres</th>
           <th>Lokalita</th>
           <th>Cena za noc</th>
@@ -50,11 +50,11 @@ export default {
 .top-cabin {
   text-align: left;
   float: left;
-  width: 100%;
+  /*width: 100%;*/
 }
 
 .top-cabin table {
-  width: 100%;
+  /*width: 100%;*/
   border-collapse: collapse;
 }
 
@@ -76,9 +76,18 @@ export default {
 }
 
 .fix-name-column {
-  width: 300px;
-  max-width: 300px;
-  min-width: 300px;
+  width: 200px;
+  max-width: 200px;
+  min-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fix-region-column {
+  width: 125px;
+  max-width: 125px;
+  min-width: 125px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

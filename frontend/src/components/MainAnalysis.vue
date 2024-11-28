@@ -1,7 +1,8 @@
 <template>
   <div>
-    <div>
+    <div class="main-analysis-stats">
       <ul>
+        <h4 style="margin-bottom: 17px; margin-top: 0;">Statistika podla chat</h4>
         <li :class="activeComponent === 'topCabinsByRating' ? 'active' : ''"
             @click="changeActiveComponent('topCabinsByRating')">Top podla ratingu
         </li>
@@ -20,7 +21,7 @@
         <li :class="activeComponent === 'topCabinsByOccupancy' ? 'active' : ''"
             @click="changeActiveComponent('topCabinsByOccupancy')">Top podla obsadenosti
         </li>
-        <br style="clear: both;">
+        <h4 style="margin-bottom: 0;">Statistika podla krajov/okresov a miest</h4>
         <li :class="activeComponent === 'cabinsCount' ? 'active' : ''"
             @click="changeActiveComponent('cabinsCount')">Pocet chat
         </li>
@@ -39,7 +40,7 @@
         <li :class="activeComponent === 'pricePerNight' ? 'active' : ''"
             @click="changeActiveComponent('pricePerNight')">Cena za osobu/noc
         </li>
-        <br style="clear: both;">
+        <h4 style="margin-bottom: 0;">Jednotliva statistika</h4>
         <li :class="activeComponent === 'occupancyPerCabinSize' ? 'active' : ''"
             @click="changeActiveComponent('occupancyPerCabinSize')">Obsadenost podla poctu izieb
         </li>
@@ -294,9 +295,10 @@ export default {
         rating,
         review,
         price,
-        occupancy
+        occupancy,
+        attributes
     ) {
-      client.get(`/cabins?region=${region}&district=${district}&locality=${locality}&rating=${rating}&reviews=${review}&averagePricePerNight=${price}&occupancy=${occupancy}`)
+      client.get(`/cabins?region=${region}&district=${district}&locality=${locality}&rating=${rating}&reviews=${review}&averagePricePerNight=${price}&occupancy=${occupancy}&attributes=${attributes}`)
           .then(response => {
             this.updateTopCabins(response.data);
           })
@@ -320,18 +322,12 @@ ul {
 
 ul li {
   display: block;
-  float: left;
   cursor: pointer;
   border: 1px solid black;
   padding: 5px 10px;
   border-left: 0;
-  width: calc(25% - 30px);
-  margin-right: 8px;
-  border-radius: 5px;
   border-left: 1px solid black;
   margin-top: 10px;
-  border-top-left-radius: 0;
-  border-bottom-right-radius: 0;
 }
 
 ul li:first-child {
@@ -355,8 +351,15 @@ ul li.active {
 }
 
 .main-analysis-content {
-  margin-top: 15px;
+  float: left;
+  width: calc(100% - 220px);
   margin-bottom: 30px;
+}
+
+.main-analysis-stats {
+  float: left;
+  width: 200px;
+  padding: 0 10px;
 }
 
 </style>

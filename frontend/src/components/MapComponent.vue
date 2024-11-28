@@ -60,6 +60,9 @@
         Pocet posteli: {{ selectedCabin.regularSleepingBeds }} |
         Pocet extra posteli: {{ selectedCabin.extraSleepingBeds }}
       </p>
+      <ul class="attributes">
+        <li v-for="attribute in selectedCabin.attributes" :key="attribute" v-text="attribute"></li>
+      </ul>
     </div>
     <br style="clear: both;">
   </div>
@@ -113,9 +116,10 @@ export default {
         rating,
         review,
         price,
-        occupancy
+        occupancy,
+        attributes
     ) {
-      client.get(`/cabins?region=${region}&district=${district}&locality=${locality}&rating=${rating}&reviews=${review}&averagePricePerNight=${price}&occupancy=${occupancy}`)
+      client.get(`/cabins?region=${region}&district=${district}&locality=${locality}&rating=${rating}&reviews=${review}&averagePricePerNight=${price}&occupancy=${occupancy}&attributes=${attributes}`)
           .then(response => {
             this.markers = response.data.map(cabin => {
               return {
@@ -199,6 +203,21 @@ export default {
   background-size: cover;
   background-position: center;
   height: 300px;
+}
+
+.attributes {
+  list-style: none;
+  padding: 0;
+}
+
+.attributes li {
+  display: inline-block;
+  margin-right: 5px;
+  margin-top: 5px;
+  background-color: darkcyan;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
 }
 
 </style>

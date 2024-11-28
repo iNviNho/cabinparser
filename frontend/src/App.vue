@@ -6,7 +6,7 @@
   </div>
   <div id="right-rest-of-the-screen">
     <MapComponent ref="map"></MapComponent>
-    <div style="padding: 0 20px;">
+    <div>
       <MainAnalysis ref="mainAnalysis"></MainAnalysis>
     </div>
   </div>
@@ -33,7 +33,8 @@ export default {
           filters.rating,
           filters.review,
           filters.price,
-          filters.occupancy
+          filters.occupancy,
+          filters.attributes
       );
       this.$refs.mainAnalysis.filtersChanged(
           filters.region,
@@ -42,7 +43,8 @@ export default {
           filters.rating,
           filters.review,
           filters.price,
-          filters.occupancy
+          filters.occupancy,
+          filters.attributes
       )
     }
   }
@@ -56,7 +58,8 @@ export default {
   top: 0;
   left: 0;
   width: 250px;
-  height: 100%;
+  height: 100vh;
+  overflow: scroll;
   background-color: darkcyan;
   color: #fff;
 }

@@ -59,6 +59,8 @@ public class Cabin {
 
   private BigDecimal occupancy;
 
+  private List<CabinAttributes> attributes;
+
   public boolean isCabinPartOfComplex() {
     return name.contains("|");
   }

@@ -32,4 +32,5 @@ public class CabinResponse {
   private String locality;
   private List<String> images;
   private BigDecimal occupancy;
+  private List<String> attributes;
 }

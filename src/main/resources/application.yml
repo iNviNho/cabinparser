@@ -55,6 +55,9 @@ flyway:
 google:
   api-key: "SET_ME"
 
+webapi:
+  token: "SET_ME"
+
 ehcache:
   caches:
     cabins:

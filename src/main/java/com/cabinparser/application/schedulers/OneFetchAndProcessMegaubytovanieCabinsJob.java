@@ -119,6 +119,7 @@ public class OneFetchAndProcessMegaubytovanieCabinsJob {
               null,
               null,
               null,
+              null,
               null
             );
 
@@ -176,6 +177,7 @@ public class OneFetchAndProcessMegaubytovanieCabinsJob {
       Instant.parse(accommodation.createdWhen()),
       Instant.now(),
       accommodationSearchDump,
+      null,
       null,
       null,
       null,

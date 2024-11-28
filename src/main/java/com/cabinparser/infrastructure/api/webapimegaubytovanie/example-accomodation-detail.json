@@ -1,0 +1,997 @@
+{
+  "last_modified_when": "2024-11-23T21:31:54+01:00",
+  "checksum": "734cd7e9ef4d31e7eceedb3a8cae672a",
+  "language": "sk",
+  "accommodation_detail": {
+    "name": "Chata Uhorčík",
+    "vip": true,
+    "top": false,
+    "created_when": "2019-01-22T15:22:03+01:00",
+    "properties_and_equipment": {
+      "shared_spaces": {
+        "shared_regular_beds_sleeping_capacity": 0,
+        "shared_extra_beds_sleeping_capacity": 0,
+        "shared_toilets_count": 0,
+        "shared_bathrooms_count": 0,
+        "shared_rooms": [
+          {
+            "same_rooms_count": 1,
+            "room_type": {
+              "id": 2,
+              "name": "Spoločenská alebo obývacia miestnosť",
+              "active": true,
+              "identifier": "common-or-living-room"
+            },
+            "room_subtype": {
+              "id": 27,
+              "name": "Spoločenská miestnosť",
+              "active": true,
+              "identifier": "common-room"
+            },
+            "regular_beds": [],
+            "extra_beds": [],
+            "id": 24930,
+            "room_equipment": [
+              {
+                "id": 7288,
+                "name": "Jedálenské posedenie",
+                "active": true,
+                "features_group": "room-equipments",
+                "short_name": "Jedálenské posedenie",
+                "identifier": "dining-area"
+              }
+            ],
+            "image_ids": [
+              264347
+            ],
+            "video_ids": [],
+            "floor": null
+          },
+          {
+            "same_rooms_count": 1,
+            "room_type": {
+              "id": 2,
+              "name": "Spoločenská alebo obývacia miestnosť",
+              "active": true,
+              "identifier": "common-or-living-room"
+            },
+            "room_subtype": {
+              "id": 27,
+              "name": "Spoločenská miestnosť",
+              "active": true,
+              "identifier": "common-room"
+            },
+            "regular_beds": [],
+            "extra_beds": [],
+            "id": 24931,
+            "room_equipment": [
+              {
+                "id": 7061,
+                "name": "Krb / Kachle",
+                "active": true,
+                "features_group": "room-equipments",
+                "short_name": "Krb / Kachle",
+                "identifier": "fireplace"
+              },
+              {
+                "id": 7207,
+                "name": "Spoločenské hry",
+                "active": true,
+                "features_group": "room-equipments",
+                "short_name": "Spoločenské hry",
+                "identifier": "parlor-games"
+              },
+              {
+                "id": 7288,
+                "name": "Jedálenské posedenie",
+                "active": true,
+                "features_group": "room-equipments",
+                "short_name": "Jedálenské posedenie",
+                "identifier": "dining-area"
+              }
+            ],
+            "image_ids": [
+              375456,
+              375457
+            ],
+            "video_ids": [],
+            "floor": null
+          },
+          {
+            "same_rooms_count": 1,
+            "room_type": {
+              "id": 2,
+              "name": "Spoločenská alebo obývacia miestnosť",
+              "active": true,
+              "identifier": "common-or-living-room"
+            },
+            "room_subtype": {
+              "id": 27,
+              "name": "Spoločenská miestnosť",
+              "active": true,
+              "identifier": "common-room"
+            },
+            "regular_beds": [],
+            "extra_beds": [],
+            "id": 364742,
+            "room_equipment": [
+              {
+                "id": 7288,
+                "name": "Jedálenské posedenie",
+                "active": true,
+                "features_group": "room-equipments",
+                "short_name": "Jedálenské posedenie",
+                "identifier": "dining-area"
+              }
+            ],
+            "image_ids": [
+              375456,
+              375457
+            ],
+            "video_ids": [],
+            "floor": null
+          },
+          {
+            "same_rooms_count": 1,
+            "room_type": {
+              "id": 3,
+              "name": "Kuchyňa",
+              "active": true,
+              "identifier": "kitchen"
+            },
+            "room_subtype": {
+              "id": 23,
+              "name": "Kuchyňa",
+              "active": true,
+              "identifier": "kitchen"
+            },
+            "regular_beds": [],
+            "extra_beds": [],
+            "id": 24932,
+            "room_equipment": [
+              {
+                "id": 7070,
+                "name": "Elektrický sporák",
+                "active": true,
+                "features_group": "room-equipments",
+                "short_name": "Elektrický sporák",
+                "identifier": "electric-stove"
+              },
+              {
+                "id": 7071,
+                "name": "Elektrická rúra",
+                "active": true,
+                "features_group": "room-equipments",
+                "short_name": "Elektrická rúra",
+                "identifier": "electric-oven"
+              },
+              {
+                "id": 7077,
+                "name": "Mikrovlnná rúra",
+                "active": true,
+                "features_group": "room-equipments",
+                "short_name": "Mikrovlnná rúra",
+                "identifier": "microwave"
+              },
+              {
+                "id": 7079,
+                "name": "Rýchlovarná kanvica",
+                "active": true,
+                "features_group": "room-equipments",
+                "short_name": "Rýchlovarná kanvica",
+                "identifier": "kettle"
+              },
+              {
+                "id": 7080,
+                "name": "Chladnička",
+                "active": true,
+                "features_group": "room-equipments",
+                "short_name": "Chladnička",
+                "identifier": "fridge"
+              },
+              {
+                "id": 7085,
+                "name": "Umývačka riadu",
+                "active": true,
+                "features_group": "room-equipments",
+                "short_name": "Umývačka riadu",
+                "identifier": "dishwasher"
+              },
+              {
+                "id": 7083,
+                "name": "Hriankovač",
+                "active": true,
+                "features_group": "room-equipments",
+                "short_name": "Hriankovač",
+                "identifier": "pop-up-toaster"
+              }
+            ],
+            "image_ids": [
+              375458
+            ],
+            "video_ids": [],
+            "floor": null
+          }
+        ],
+        "shared_regular_beds": [],
+        "shared_extra_beds": []
+      },
+      "equipment": {
+        "basic_stats": {
+          "regular_beds_sleeping_capacity": 17,
+          "extra_beds_sleeping_capacity": 5,
+          "bedrooms_count": 6,
+          "toilets_count": 6,
+          "bathrooms_count": 6
+        },
+        "internet": {
+          "available": true,
+          "wifi": "available",
+          "utp_cable": "not-available",
+          "free_of_charge": null,
+          "connection_speed_mbps": null
+        },
+        "catering_options": [
+          {
+            "id": 87,
+            "name": "Bez stravy",
+            "active": true,
+            "features_group": "catering-types",
+            "short_name": "Bez stravy",
+            "identifier": "no-catering"
+          },
+          {
+            "id": 88,
+            "name": "Raňajky",
+            "active": true,
+            "features_group": "catering-types",
+            "short_name": "Raňajky",
+            "identifier": "breakfast"
+          },
+          {
+            "id": 89,
+            "name": "Obed",
+            "active": true,
+            "features_group": "catering-types",
+            "short_name": "Obed",
+            "identifier": "lunch"
+          },
+          {
+            "id": 90,
+            "name": "Večera",
+            "active": true,
+            "features_group": "catering-types",
+            "short_name": "Večera",
+            "identifier": "dinner"
+          },
+          {
+            "id": 91,
+            "name": "Polpenzia",
+            "active": true,
+            "features_group": "catering-types",
+            "short_name": "Polpenzia",
+            "identifier": "half-board"
+          },
+          {
+            "id": 92,
+            "name": "Plná penzia",
+            "active": true,
+            "features_group": "catering-types",
+            "short_name": "Plná penzia",
+            "identifier": "full-board"
+          }
+        ],
+        "parking": {
+          "reserved_parking_places_count": 6,
+          "reserved_parking_for_free": true,
+          "parking_distance": {
+            "id": 237,
+            "name": "Pri objekte",
+            "active": true,
+            "features_group": "distance-types",
+            "short_name": "Pri objekte",
+            "identifier": "near-property"
+          },
+          "parking_options": []
+        },
+        "equipments_for_children": [
+          {
+            "id": 210,
+            "name": "Detská postieľka",
+            "active": true,
+            "features_group": "equipments-for-children",
+            "short_name": "Detská postieľka",
+            "identifier": "baby-s-bed"
+          },
+          {
+            "id": 99,
+            "name": "Pieskovisko",
+            "active": true,
+            "features_group": "equipments-for-children",
+            "short_name": "Pieskovisko",
+            "identifier": "sandbox"
+          },
+          {
+            "id": 102,
+            "name": "Hojdačka",
+            "active": true,
+            "features_group": "equipments-for-children",
+            "short_name": "Hojdačka",
+            "identifier": "swing"
+          },
+          {
+            "id": 103,
+            "name": "Preliezky",
+            "active": true,
+            "features_group": "equipments-for-children",
+            "short_name": "Preliezky",
+            "identifier": "jungle-gym-for-children"
+          },
+          {
+            "id": 104,
+            "name": "Šmýkačka",
+            "active": true,
+            "features_group": "equipments-for-children",
+            "short_name": "Šmýkačka",
+            "identifier": "slides-for-children"
+          },
+          {
+            "id": 205,
+            "name": "Trampolína",
+            "active": true,
+            "features_group": "equipments-for-children",
+            "short_name": "Trampolína",
+            "identifier": "trampoline"
+          },
+          {
+            "id": 98,
+            "name": "Detské ihrisko",
+            "active": true,
+            "features_group": "equipments-for-children",
+            "short_name": "Detské ihrisko",
+            "identifier": "playground"
+          }
+        ],
+        "exterior_equipments": [
+          {
+            "id": 140,
+            "name": "Altánok",
+            "active": true,
+            "features_group": "exterior-equipments",
+            "short_name": "Altánok",
+            "identifier": "arbor"
+          },
+          {
+            "id": 141,
+            "name": "Gril",
+            "active": true,
+            "features_group": "exterior-equipments",
+            "short_name": "Gril",
+            "identifier": "grill"
+          },
+          {
+            "id": 142,
+            "name": "Kotlík",
+            "active": true,
+            "features_group": "exterior-equipments",
+            "short_name": "Kotlík",
+            "identifier": "goulash-kettle"
+          },
+          {
+            "id": 146,
+            "name": "Vonkajšie posedenie",
+            "active": true,
+            "features_group": "exterior-equipments",
+            "short_name": "Vonkajšie posedenie",
+            "identifier": "outdoor-seating"
+          }
+        ],
+        "relax_opportunities": [
+          {
+            "id": 130,
+            "name": "Sauna",
+            "active": true,
+            "features_group": "relax-opportunities",
+            "short_name": "Sauna",
+            "identifier": "sauna"
+          },
+          {
+            "id": 132,
+            "name": "Vírivka",
+            "active": true,
+            "features_group": "relax-opportunities",
+            "short_name": "Vírivka",
+            "identifier": "jacuzzi"
+          },
+          {
+            "id": 128,
+            "name": "Masáže",
+            "active": true,
+            "features_group": "relax-opportunities",
+            "short_name": "Masáže",
+            "identifier": "massage"
+          }
+        ],
+        "sport_opportunities": [
+          {
+            "id": 274,
+            "name": "Basketbal",
+            "active": true,
+            "features_group": "sport-opportunities",
+            "short_name": "Basketbal",
+            "identifier": "basketball"
+          },
+          {
+            "id": 109,
+            "name": "Šípky",
+            "active": true,
+            "features_group": "sport-opportunities",
+            "short_name": "Šípky",
+            "identifier": "darts"
+          },
+          {
+            "id": 111,
+            "name": "Futbal",
+            "active": true,
+            "features_group": "sport-opportunities",
+            "short_name": "Futbal",
+            "identifier": "football"
+          },
+          {
+            "id": 118,
+            "name": "Stolný futbal",
+            "active": true,
+            "features_group": "sport-opportunities",
+            "short_name": "Stolný futbal",
+            "identifier": "table-football"
+          },
+          {
+            "id": 119,
+            "name": "Stolný tenis",
+            "active": true,
+            "features_group": "sport-opportunities",
+            "short_name": "Stolný tenis",
+            "identifier": "table-tennis"
+          }
+        ],
+        "agro_tourism_options": [],
+        "social_spaces": [
+          {
+            "id": 137,
+            "name": "Kongresová miestnosť",
+            "active": true,
+            "features_group": "social-space-types",
+            "short_name": "Kongresová miestnosť",
+            "identifier": "conference-room"
+          }
+        ],
+        "additional_services": [
+          {
+            "id": 139,
+            "name": "Zapožičanie techniky",
+            "active": true,
+            "features_group": "additional-services",
+            "short_name": "Zapožičanie techniky",
+            "identifier": "rent-of-technical-equipment"
+          },
+          {
+            "id": 149,
+            "name": "Lyžiareň",
+            "active": true,
+            "features_group": "additional-services",
+            "short_name": "Lyžiareň",
+            "identifier": "ski-room"
+          },
+          {
+            "id": 208,
+            "name": "Sušiče na lyžiarky",
+            "active": true,
+            "features_group": "additional-services",
+            "short_name": "Sušiče na lyžiarky",
+            "identifier": "ski-boot-dryers"
+          },
+          {
+            "id": 150,
+            "name": "Úschovňa na bicykle",
+            "active": true,
+            "features_group": "additional-services",
+            "short_name": "Úschovňa na bicykle",
+            "identifier": "bike-storage"
+          }
+        ],
+        "card_payment_allowed": false
+      },
+      "additional_information": {
+        "accommodation_type": {
+          "id": 11,
+          "name": "Drevenica",
+          "active": true,
+          "identifier": "wooden-house"
+        },
+        "accommodation_types_group": {
+          "name": "Drevenice",
+          "url_fragment": "drevenice",
+          "url_fragment_id": 9875,
+          "web_identifier": "mu-sk",
+          "id": 2,
+          "identifier": "wooden-houses"
+        },
+        "other_accommodation_types": [],
+        "checkin": {
+          "from_time": "15:00",
+          "to_time": "19:00"
+        },
+        "checkout": {
+          "from_time": "07:00",
+          "to_time": "09:30"
+        },
+        "owner_presence_type": {
+          "id": 204,
+          "name": "NIE, majiteľ (správca) sa počas pobytu nezdržiava / nebýva v objekte",
+          "active": true,
+          "features_group": "owner-presence-types",
+          "short_name": "NIE, majiteľ (správca) sa počas pobytu nezdržiava / nebýva v objekte",
+          "identifier": "not-present"
+        },
+        "reception": {
+          "present": false,
+          "opening_period": "not-specified",
+          "from_time": null,
+          "to_time": null
+        },
+        "communication_languages": [
+          "slovenčina",
+          "čeština",
+          "poľština",
+          "angličtina",
+          "nemčina"
+        ],
+        "smoking_permission": {
+          "id": 161,
+          "name": "Fajčenie v interiéri NIE JE povolené",
+          "active": true,
+          "features_group": "smoking-permissions",
+          "short_name": "Fajčenie v interiéri NIE JE povolené",
+          "identifier": "forbidden"
+        },
+        "barrier_free_access_type": {
+          "id": 200,
+          "name": "NIE, objekt nie je bezbariérový",
+          "active": true,
+          "features_group": "barrier-free-access-types",
+          "short_name": "NIE, objekt nie je bezbariérový",
+          "identifier": "none"
+        },
+        "pets_permission": {
+          "id": 324,
+          "name": "POVOLENÝ, iba malá rasa (po dohode s majiteľom)",
+          "active": true,
+          "features_group": "pets-permissions",
+          "short_name": "POVOLENÝ, iba malá rasa (po dohode s majiteľom)",
+          "identifier": "allowed-small"
+        },
+        "pets_for_charge": true,
+        "multiple_accommodated_groups_allowed": false,
+        "heating": {
+          "heating_available": true,
+          "heating_types": [
+            {
+              "id": 331,
+              "name": "Radiátory",
+              "active": true,
+              "features_group": "heating-types",
+              "short_name": "Radiátory",
+              "identifier": "radiators"
+            }
+          ],
+          "heating_sources": [
+            {
+              "id": 328,
+              "name": "Plyn",
+              "active": true,
+              "features_group": "heating-sources",
+              "short_name": "Plyn",
+              "identifier": "gas"
+            }
+          ]
+        },
+        "mobile_network": {
+          "mobile_signal_available": true,
+          "mobile_operators": [
+            {
+              "id": 164,
+              "name": "Telekom",
+              "active": true,
+              "features_group": "mobile-operators",
+              "short_name": "Telekom",
+              "identifier": "t-mobile"
+            },
+            {
+              "id": 165,
+              "name": "Orange",
+              "active": true,
+              "features_group": "mobile-operators",
+              "short_name": "Orange",
+              "identifier": "orange"
+            },
+            {
+              "id": 166,
+              "name": "O2",
+              "active": true,
+              "features_group": "mobile-operators",
+              "short_name": "O2",
+              "identifier": "o2"
+            },
+            {
+              "id": 273,
+              "name": "4ka",
+              "active": true,
+              "features_group": "mobile-operators",
+              "short_name": "4ka",
+              "identifier": "4ka"
+            }
+          ]
+        },
+        "nearby_activities": [
+          {
+            "id": 172,
+            "name": "Bežecké trate (bežkovanie)",
+            "active": true,
+            "features_group": "nearby-activities",
+            "short_name": "Bežecké trate (bežkovanie)",
+            "identifier": "cross-country-trails-cross-country-skiin"
+          },
+          {
+            "id": 173,
+            "name": "Biliard",
+            "active": true,
+            "features_group": "nearby-activities",
+            "short_name": "Biliard",
+            "identifier": "billiard"
+          },
+          {
+            "id": 174,
+            "name": "Bowling",
+            "active": true,
+            "features_group": "nearby-activities",
+            "short_name": "Bowling",
+            "identifier": "bowling"
+          },
+          {
+            "id": 175,
+            "name": "Cyklistika / Cykloturistika",
+            "active": true,
+            "features_group": "nearby-activities",
+            "short_name": "Cyklistika / Cykloturistika",
+            "identifier": "cycling-biking"
+          },
+          {
+            "id": 176,
+            "name": "Fitness centrum",
+            "active": true,
+            "features_group": "nearby-activities",
+            "short_name": "Fitness centrum",
+            "identifier": "fitness-center"
+          },
+          {
+            "id": 177,
+            "name": "Futbalové ihrisko",
+            "active": true,
+            "features_group": "nearby-activities",
+            "short_name": "Futbalové ihrisko",
+            "identifier": "football-field"
+          },
+          {
+            "id": 179,
+            "name": "Hubárčenie",
+            "active": true,
+            "features_group": "nearby-activities",
+            "short_name": "Hubárčenie",
+            "identifier": "mushrooming"
+          },
+          {
+            "id": 180,
+            "name": "Jazda na koňoch",
+            "active": true,
+            "features_group": "nearby-activities",
+            "short_name": "Jazda na koňoch",
+            "identifier": "horseback-riding"
+          },
+          {
+            "id": 181,
+            "name": "Korčuľovanie (kolieskové)",
+            "active": true,
+            "features_group": "nearby-activities",
+            "short_name": "Korčuľovanie (kolieskové)",
+            "identifier": "rollerskating"
+          },
+          {
+            "id": 182,
+            "name": "Korčuľovanie na ľade",
+            "active": true,
+            "features_group": "nearby-activities",
+            "short_name": "Korčuľovanie na ľade",
+            "identifier": "skating-on-ice"
+          },
+          {
+            "id": 186,
+            "name": "Masáže",
+            "active": true,
+            "features_group": "nearby-activities",
+            "short_name": "Masáže",
+            "identifier": "massage"
+          },
+          {
+            "id": 187,
+            "name": "Minigolf",
+            "active": true,
+            "features_group": "nearby-activities",
+            "short_name": "Minigolf",
+            "identifier": "mini-golf"
+          },
+          {
+            "id": 188,
+            "name": "Otvorený bazén",
+            "active": true,
+            "features_group": "nearby-activities",
+            "short_name": "Otvorený bazén",
+            "identifier": "outdoor-swimming-pool"
+          },
+          {
+            "id": 189,
+            "name": "Rybolov",
+            "active": true,
+            "features_group": "nearby-activities",
+            "short_name": "Rybolov",
+            "identifier": "fishing"
+          },
+          {
+            "id": 190,
+            "name": "Sauna",
+            "active": true,
+            "features_group": "nearby-activities",
+            "short_name": "Sauna",
+            "identifier": "sauna"
+          },
+          {
+            "id": 191,
+            "name": "Snowboarding",
+            "active": true,
+            "features_group": "nearby-activities",
+            "short_name": "Snowboarding",
+            "identifier": "snowboarding"
+          },
+          {
+            "id": 193,
+            "name": "Stolný tenis",
+            "active": true,
+            "features_group": "nearby-activities",
+            "short_name": "Stolný tenis",
+            "identifier": "table-tennis"
+          },
+          {
+            "id": 194,
+            "name": "Tenis",
+            "active": true,
+            "features_group": "nearby-activities",
+            "short_name": "Tenis",
+            "identifier": "tennis"
+          },
+          {
+            "id": 196,
+            "name": "Turistika",
+            "active": true,
+            "features_group": "nearby-activities",
+            "short_name": "Turistika",
+            "identifier": "hiking"
+          },
+          {
+            "id": 197,
+            "name": "Viacúčelová veľká športová hala",
+            "active": true,
+            "features_group": "nearby-activities",
+            "short_name": "Viacúčelová veľká športová hala",
+            "identifier": "multi-purpose-sports-hall"
+          },
+          {
+            "id": 198,
+            "name": "Wellness",
+            "active": true,
+            "features_group": "nearby-activities",
+            "short_name": "Wellness",
+            "identifier": "wellness"
+          }
+        ],
+        "suitable_for_visitor_types": [
+          {
+            "id": 27,
+            "name": "pre náročných",
+            "tag_type": "suitable-for-visitor-type",
+            "listing_icon": null,
+            "url_fragment_id": 9949,
+            "identifier": "for-demanding-customers",
+            "accommodations_count": 1101,
+            "url_fragment": "pre-narocnych"
+          },
+          {
+            "id": 35,
+            "name": "pre rodiny s deťmi",
+            "tag_type": "suitable-for-visitor-type",
+            "listing_icon": "FamilyIcon",
+            "url_fragment_id": 9951,
+            "identifier": "for-families",
+            "accommodations_count": 3477,
+            "url_fragment": "pre-rodiny-s-detmi"
+          },
+          {
+            "id": 38,
+            "name": "pre turistov",
+            "tag_type": "suitable-for-visitor-type",
+            "listing_icon": null,
+            "url_fragment_id": 9957,
+            "identifier": "for-tourists",
+            "accommodations_count": 3379,
+            "url_fragment": "pre-turistov"
+          },
+          {
+            "id": 39,
+            "name": "pre cyklistov",
+            "tag_type": "suitable-for-visitor-type",
+            "listing_icon": null,
+            "url_fragment_id": 9959,
+            "identifier": "for-bikers",
+            "accommodations_count": 2089,
+            "url_fragment": "pre-cyklistov"
+          },
+          {
+            "id": 78,
+            "name": "pre skupiny",
+            "tag_type": "suitable-for-visitor-type",
+            "listing_icon": null,
+            "url_fragment_id": 9975,
+            "identifier": "for-groups",
+            "accommodations_count": 2649,
+            "url_fragment": "pre-skupiny"
+          }
+        ],
+        "suitable_for_activities": [
+          {
+            "id": 3,
+            "name": "na zimnú dovolenku",
+            "tag_type": "suitable-for-activity",
+            "listing_icon": null,
+            "url_fragment_id": 9892,
+            "identifier": "for-a-winter-break",
+            "accommodations_count": 2817,
+            "url_fragment": "zimna-dovolenka"
+          },
+          {
+            "id": 28,
+            "name": "luxusné ubytovanie",
+            "tag_type": "suitable-for-activity",
+            "listing_icon": "LuxuryIcon",
+            "url_fragment_id": 9898,
+            "identifier": "luxury-accommodation",
+            "accommodations_count": 464,
+            "url_fragment": "luxusne"
+          },
+          {
+            "id": 49,
+            "name": "teambuilding",
+            "tag_type": "suitable-for-activity",
+            "listing_icon": null,
+            "url_fragment_id": 9910,
+            "identifier": "teambuilding",
+            "accommodations_count": 716,
+            "url_fragment": "teambuilding"
+          },
+          {
+            "id": 50,
+            "name": "firemné akcie",
+            "tag_type": "suitable-for-activity",
+            "listing_icon": null,
+            "url_fragment_id": 9911,
+            "identifier": "corporate-events",
+            "accommodations_count": 506,
+            "url_fragment": "firemne-akcie"
+          },
+          {
+            "id": 54,
+            "name": "aktívna dovolenka",
+            "tag_type": "suitable-for-activity",
+            "listing_icon": null,
+            "url_fragment_id": 9920,
+            "identifier": "active-holidays",
+            "accommodations_count": 2510,
+            "url_fragment": "aktivna-dovolenka"
+          },
+          {
+            "id": 56,
+            "name": "wellness pobyty",
+            "tag_type": "suitable-for-activity",
+            "listing_icon": "WellnessIcon",
+            "url_fragment_id": 9924,
+            "identifier": "wellness-stays",
+            "accommodations_count": 410,
+            "url_fragment": "wellness-pobyty"
+          },
+          {
+            "id": 68,
+            "name": "relaxačné pobyty",
+            "tag_type": "suitable-for-activity",
+            "listing_icon": null,
+            "url_fragment_id": 9938,
+            "identifier": "relaxation-stays",
+            "accommodations_count": 1261,
+            "url_fragment": "relaxacne-pobyty"
+          },
+          {
+            "id": 77,
+            "name": "na leto 2025",
+            "tag_type": "suitable-for-activity",
+            "listing_icon": null,
+            "url_fragment_id": 9940,
+            "identifier": "for-summer-2024",
+            "accommodations_count": 2433,
+            "url_fragment": "na-leto"
+          },
+          {
+            "id": 103,
+            "name": "rekreačné poukazy",
+            "tag_type": "suitable-for-activity",
+            "listing_icon": "RecreationVoucherIcon",
+            "url_fragment_id": 9946,
+            "identifier": "holiday-vouchers",
+            "accommodations_count": 1174,
+            "url_fragment": "rekreacne-poukazy"
+          }
+        ]
+      },
+      "location": {
+        "placement": {
+          "id": 4,
+          "name": "v rekreačnej oblasti",
+          "active": true,
+          "features_group": "placements",
+          "short_name": "v rekreačnej oblasti",
+          "identifier": "in-the-recreation-area"
+        },
+        "placement_details": [
+          {
+            "id": 7308,
+            "name": "v prírode",
+            "active": true,
+            "features_group": "placement-details",
+            "short_name": "v prírode",
+            "identifier": "v-prirode"
+          },
+          {
+            "id": 7,
+            "name": "pri lese /  na okraji lesa",
+            "active": true,
+            "features_group": "placement-details",
+            "short_name": "pri lese /  na okraji lesa",
+            "identifier": "near-the-forest-on-the-edge-of-the-fores"
+          },
+          {
+            "id": 9,
+            "name": "pri vode",
+            "active": true,
+            "features_group": "placement-details",
+            "short_name": "pri vode",
+            "identifier": "near-waterside"
+          },
+          {
+            "id": 224,
+            "name": "pri potoku",
+            "active": true,
+            "features_group": "placement-details",
+            "short_name": "pri potoku",
+            "identifier": "near-the-brook"
+          }
+        ]
+      }
+    }
+  },
+  "portal_season": "winter-season"
+}

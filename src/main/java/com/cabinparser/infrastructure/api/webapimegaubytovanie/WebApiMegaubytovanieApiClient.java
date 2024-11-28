@@ -3,6 +3,7 @@ package com.cabinparser.infrastructure.api.webapimegaubytovanie;
 import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.Body;
 import io.micronaut.http.annotation.Get;
+import io.micronaut.http.annotation.Header;
 import io.micronaut.http.annotation.Post;
 import io.micronaut.http.client.annotation.Client;
 import java.time.LocalDate;
@@ -40,4 +41,9 @@ public interface WebApiMegaubytovanieApiClient {
     LocalDate fromDate
   );
 
+  @Get("/v1/public-backend/accommodations/detail-by-id/{id}")
+  AccommodationDetailResponse getAccommodationDetail(
+    @Header("Authorization") String authorization,
+    String id
+  );
 }

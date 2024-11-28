@@ -36,6 +36,13 @@
       <Slider v-model="selectedOccupancy" :format="formatPercentage" :max="100" :min="0"
               :step="5" @change="occupancyChanged"/>
     </div>
+    <div class="inline-block" style="margin-bottom: 40px;">
+      <h3>Vybavenost</h3>
+      <multiselect v-model="selectedAttributes"
+                   :options="availableAttributes"
+                   :placeholder="'Vyber'"
+                   :selectLabel="''" multiple @remove="filtersChanged" @select="filtersChanged"></multiselect>
+    </div>
   </div>
 </template>
 
@@ -66,7 +73,9 @@ export default {
       selectedRating: [0, 10],
       selectedReview: [0, 200],
       selectedPrice: [0, 2500],
-      selectedOccupancy: [0, 100]
+      selectedOccupancy: [0, 100],
+      selectedAttributes: [],
+      availableAttributes: []
     }
   },
   methods: {
@@ -123,7 +132,8 @@ export default {
         rating: this.selectedRating,
         review: this.selectedReview,
         price: this.selectedPrice,
-        occupancy: this.selectedOccupancy
+        occupancy: this.selectedOccupancy,
+        attributes: this.selectedAttributes
       });
     }
   },
@@ -131,6 +141,16 @@ export default {
     client.get('/locations/regions')
         .then(response => {
           this.regions = response.data;
+          this.filtersChanged();
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    client.get('/cabin-attributes')
+        .then(response => {
+          this.availableAttributes = response.data.map(feature => {
+            return feature.translation;
+          });
           this.filtersChanged();
         })
         .catch(error => {

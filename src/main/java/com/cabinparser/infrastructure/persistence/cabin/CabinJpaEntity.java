@@ -53,5 +53,7 @@ class CabinJpaEntity {
   private String locality;
   private Instant lastCalendarOccupancyUpdate;
   private BigDecimal occupancy;
+  @TypeDef(type = DataType.JSON)
+  private String attributes;
 
 }
