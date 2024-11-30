@@ -5,9 +5,10 @@
     <MainLeftBar @filters-changed="filtersChanged"></MainLeftBar>
   </div>
   <div id="right-rest-of-the-screen">
-    <MapComponent ref="map"></MapComponent>
+    <MapComponent ref="map" @on-marker-click="showCabin"></MapComponent>
+    <CabinView ref="cabinView"></CabinView>
     <div>
-      <MainAnalysis ref="mainAnalysis"></MainAnalysis>
+      <MainAnalysis ref="mainAnalysis" @on-cabin-click="showCabin"></MainAnalysis>
     </div>
   </div>
 </template>
@@ -16,15 +17,20 @@
 import MapComponent from './components/MapComponent.vue'
 import MainLeftBar from './components/MainLeftBar.vue'
 import MainAnalysis from './components/MainAnalysis.vue'
+import CabinView from './components/CabinView.vue'
 
 export default {
   name: 'App',
   components: {
     MapComponent,
     MainLeftBar,
-    MainAnalysis
+    MainAnalysis,
+    CabinView
   },
   methods: {
+    showCabin(cabin) {
+      this.$refs.cabinView.showCabin(cabin);
+    },
     filtersChanged(filters) {
       this.$refs.map.filtersChanged(
           filters.region,

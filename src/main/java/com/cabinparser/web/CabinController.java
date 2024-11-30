@@ -13,6 +13,7 @@ import jakarta.inject.Singleton;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -74,7 +75,9 @@ public class CabinController {
         });
       });
 
-    return cabinAttributes;
+    return cabinAttributes.stream().sorted(
+      Comparator.comparing(CabinAttributes::translation)
+    ).toList();
   }
 
   protected boolean doStringComparison(final String valueGiven, final String valueToCompareAgainst) {

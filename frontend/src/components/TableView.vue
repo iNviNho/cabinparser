@@ -15,8 +15,13 @@
         </tr>
         <tr v-for="cabin in data" :key="cabin.name">
           <td class="fix-name-column">
-            <a :href="'https://megaubytovanie.sk/'+cabin.urlFragment" style="color: black;"
-               target="_blank">{{ cabin.name }}</a>
+            <a :href="'https://megaubytovanie.sk/'+cabin.urlFragment"
+               style="color: black;"
+               target="_blank"><img src="/external.png"
+                                    width="15px"></a> |
+            <span class="showcabinp" @click="showCabin(cabin)">
+              {{ cabin.name }}
+            </span>
           </td>
           <td>{{ cabin.rating }}</td>
           <td>{{ cabin.reviewsCount }}</td>
@@ -41,6 +46,11 @@ export default {
   name: 'TableView',
   props: {
     data: Array,
+  },
+  methods: {
+    showCabin(cabin) {
+      this.$emit('on-cabin-click', cabin);
+    }
   }
 }
 </script>
@@ -91,6 +101,14 @@ export default {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.showcabinp {
+  cursor: pointer;
+}
+
+.showcabinp:hover {
+  text-decoration: underline;
 }
 
 </style>

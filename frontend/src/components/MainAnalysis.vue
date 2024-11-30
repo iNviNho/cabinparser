@@ -64,17 +64,17 @@
       </select>
       <br style="clear: both;">
       <TableView v-if="topCabinsByRating.length > 0 && activeComponent === 'topCabinsByRating'"
-                 :data="topCabinsByRating"></TableView>
+                 :data="topCabinsByRating" @on-cabin-click="onCabinClick"></TableView>
       <TableView v-if="topCabinsByReviews.length > 0 && activeComponent === 'topCabinsByReviews'"
-                 :data="topCabinsByReviews"></TableView>
+                 :data="topCabinsByReviews" @on-cabin-click="onCabinClick"></TableView>
       <TableView v-if="topCabinsByPriceAsc.length > 0 && activeComponent === 'topCabinsByPriceAsc'"
-                 :data="topCabinsByPriceAsc"></TableView>
+                 :data="topCabinsByPriceAsc" @on-cabin-click="onCabinClick"></TableView>
       <TableView v-if="topCabinsByPriceDesc.length > 0 && activeComponent === 'topCabinsByPriceDesc'"
-                 :data="topCabinsByPriceDesc"></TableView>
+                 :data="topCabinsByPriceDesc" @on-cabin-click="onCabinClick"></TableView>
       <TableView v-if="topCabinsByMonthlyIncome.length > 0 && activeComponent === 'topCabinsByMonthlyIncome'"
-                 :data="topCabinsByMonthlyIncome"></TableView>
+                 :data="topCabinsByMonthlyIncome" @on-cabin-click="onCabinClick"></TableView>
       <TableView v-if="topCabinsByOccupancy.length > 0 && activeComponent === 'topCabinsByOccupancy'"
-                 :data="topCabinsByOccupancy"></TableView>
+                 :data="topCabinsByOccupancy" @on-cabin-click="onCabinClick"></TableView>
 
       <SimpleTableView v-if="activeComponent === 'cabinsCount'"
                        :data="cabinsCount"
@@ -149,6 +149,9 @@ export default {
   methods: {
     changeActiveComponent(name) {
       this.activeComponent = name;
+    },
+    onCabinClick(cabin) {
+      this.$emit('on-cabin-click', cabin);
     },
     updateTopCabins(cabins) {
       this.cabins = cabins;

@@ -9,12 +9,12 @@
   },
   "dependencies": {
     "@chenfengyuan/vue-carousel": "^2.0.0",
-    "@fawmi/vue-google-maps": "^0.9.79",
     "@vueform/slider": "^2.1.10",
     "axios": "^1.7.7",
     "core-js": "^3.8.3",
     "vue": "^3.5.12",
-    "vue-multiselect": "^3.1.0"
+    "vue-multiselect": "^3.1.0",
+    "vue3-google-map": "^0.21.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
