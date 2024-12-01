@@ -6,6 +6,7 @@ import com.cabinparser.domain.cabinocupancy.CabinOccupancyRepository;
 import io.micronaut.data.exceptions.DataAccessException;
 import jakarta.inject.Singleton;
 import java.time.LocalDate;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,13 +36,24 @@ public class CabinOccupancyRepositoryJpaImpl implements CabinOccupancyRepository
   }
 
   @Override
-  public int getOccupanciesByCabinIdAndDateRange(
+  public int getOccupiedDaysCabinIdAndDateRange(
     final int cabinId,
     final LocalDate startDate,
     final LocalDate endDate
   ) {
     return this.cabinOccupancyJpaRepository.getNumberOfOccupanciesByCabinIdAndDateRange(
       cabinId, startDate, endDate);
+  }
+
+  @Override
+  public List<CabinOccupancy> getCabinOccupanciesByCabinIdAndDateRange(
+    final int cabinId,
+    final LocalDate startDate,
+    final LocalDate endDate
+  ) {
+    return this.cabinOccupancyJpaRepository.getCabinOccupanciesByCabinIdAndDateRange(
+        cabinId, startDate, endDate)
+      .stream().map(cabinOccupancyJpaEntityMapper::toDomain).toList();
   }
 
 }

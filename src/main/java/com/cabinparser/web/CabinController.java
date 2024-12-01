@@ -4,6 +4,8 @@ import com.cabinparser.application.Constants;
 import com.cabinparser.domain.cabin.Cabin;
 import com.cabinparser.domain.cabin.CabinAttributes;
 import com.cabinparser.domain.cabin.CabinService;
+import com.cabinparser.domain.cabinocupancy.CabinOccupancy;
+import com.cabinparser.domain.cabinocupancy.CabinOccupancyService;
 import com.cabinparser.web.mappers.CabinToCabinResponseMapper;
 import com.cabinparser.web.responses.CabinResponse;
 import io.micronaut.http.annotation.Controller;
@@ -11,6 +13,7 @@ import io.micronaut.http.annotation.Get;
 import jakarta.annotation.security.PermitAll;
 import jakarta.inject.Singleton;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -27,6 +30,8 @@ import lombok.AllArgsConstructor;
 public class CabinController {
 
   CabinService cabinService;
+
+  CabinOccupancyService cabinOccupancyService;
 
   CabinToCabinResponseMapper cabinToCabinResponseMapper;
 
@@ -55,6 +60,17 @@ public class CabinController {
         cabin.getAttributes().stream().map(CabinAttributes::translation).collect(Collectors.toList())))
       .map(cabinToCabinResponseMapper::toCabinResponse)
       .collect(Collectors.toList());
+  }
+
+  @Get("/cabin-occupancy/{cabinId}")
+  public List<CabinOccupancy> getCabinOccupancies(
+    final String cabinId
+  ) {
+    return cabinOccupancyService.getOccupancyByCabin(
+      Integer.parseInt(cabinId),
+      LocalDate.now().minusMonths(12),
+      LocalDate.now().plusMonths(12)
+    );
   }
 
   @Get("/cabin-attributes")

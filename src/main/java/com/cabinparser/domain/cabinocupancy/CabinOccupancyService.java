@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -16,12 +17,23 @@ public class CabinOccupancyService {
 
   protected CabinOccupancyRepository cabinOccupancyRepository;
 
+  public List<CabinOccupancy> getOccupancyByCabin(
+    final int cabinId,
+    final LocalDate startDate,
+    final LocalDate endDate
+
+  ) {
+    return cabinOccupancyRepository.getCabinOccupanciesByCabinIdAndDateRange(
+      cabinId, startDate, endDate
+    );
+  }
+
   public void store(final CabinOccupancy cabinOccupancy) {
     cabinOccupancyRepository.store(cabinOccupancy);
   }
 
   public BigDecimal calculateOccupancy(final Cabin cabin, final LocalDate cabinParserStartDate, final LocalDate now) {
-    final int occupiedDays = cabinOccupancyRepository.getOccupanciesByCabinIdAndDateRange(
+    final int occupiedDays = cabinOccupancyRepository.getOccupiedDaysCabinIdAndDateRange(
       cabin.getId(), cabinParserStartDate, now.minusDays(1)
     );
     final long totalDays = cabinParserStartDate.until(now, ChronoUnit.DAYS);
