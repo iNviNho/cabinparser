@@ -55,5 +55,5 @@ class CabinJpaEntity {
   private BigDecimal occupancy;
   @TypeDef(type = DataType.JSON)
   private String attributes;
-
+  private boolean star;
 }

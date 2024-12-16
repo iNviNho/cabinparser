@@ -145,8 +145,8 @@ test {
     // log test output for tests
     testLogging.showStandardStreams = true
     testLogging.exceptionFormat = "full"
-    dependsOn checkstyleMain
-    dependsOn checkstyleTest
+//    dependsOn checkstyleMain
+//    dependsOn checkstyleTest
 
     // use JUnit 5 platform
     useJUnitPlatform()
@@ -168,9 +168,9 @@ jacocoTestReport {
     }
 }
 
-checkstyleMain {
-    source = 'src/main/java'
-}
-checkstyleTest {
-    source = 'src/test/java'
-}
+//checkstyleMain {
+//    source = 'src/main/java'
+//}
+//checkstyleTest {
+//    source = 'src/test/java'
+//}

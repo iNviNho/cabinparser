@@ -36,12 +36,15 @@
       <Slider v-model="selectedOccupancy" :format="formatPercentage" :max="100" :min="0"
               :step="5" @change="occupancyChanged"/>
     </div>
-    <div class="inline-block" style="margin-bottom: 40px;">
+    <div class="inline-block" style="margin-bottom: 20px;">
       <h3>Vybavenost</h3>
       <multiselect v-model="selectedAttributes"
                    :options="availableAttributes"
                    :placeholder="'Vyber'"
                    :selectLabel="''" multiple @remove="filtersChanged" @select="filtersChanged"></multiselect>
+    </div>
+    <div class="inline-block" style="margin-bottom: 40px;">
+      <h3><input type="checkbox" v-model="star" @change="filtersChanged"> Oblubene</h3>
     </div>
   </div>
 </template>
@@ -75,7 +78,8 @@ export default {
       selectedPrice: [0, 2500],
       selectedOccupancy: [0, 100],
       selectedAttributes: [],
-      availableAttributes: []
+      availableAttributes: [],
+      star: false,
     }
   },
   methods: {
@@ -133,7 +137,8 @@ export default {
         review: this.selectedReview,
         price: this.selectedPrice,
         occupancy: this.selectedOccupancy,
-        attributes: this.selectedAttributes
+        attributes: this.selectedAttributes,
+        star: this.star,
       });
     }
   },

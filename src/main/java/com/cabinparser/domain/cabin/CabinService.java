@@ -55,6 +55,13 @@ public class CabinService {
       .collect(Collectors.toList());
   }
 
+  public Cabin toggleCabinStar(int cabinId, boolean star) {
+    final Cabin cabin = cabinRepository.getById(cabinId);
+    cabin.setStar(star);
+    cabinRepository.update(cabin);
+    return cabin;
+  }
+
   public void update(final Cabin cabin) {
     cabinRepository.update(cabin);
   }

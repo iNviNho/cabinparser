@@ -2,7 +2,7 @@
   <div>
     <div class="main-analysis-stats">
       <ul>
-        <h4 style="margin-bottom: 17px; margin-top: 0;">Statistika podla chat</h4>
+        <h4 style="margin-bottom: 17px; margin-top: 40px;">Statistika podla chat</h4>
         <li :class="activeComponent === 'topCabinsByRating' ? 'active' : ''"
             @click="changeActiveComponent('topCabinsByRating')">Top podla ratingu
         </li>
@@ -299,9 +299,10 @@ export default {
         review,
         price,
         occupancy,
-        attributes
+        attributes,
+        star
     ) {
-      client.get(`/cabins?region=${region}&district=${district}&locality=${locality}&rating=${rating}&reviews=${review}&averagePricePerNight=${price}&occupancy=${occupancy}&attributes=${attributes}`)
+      client.get(`/cabins?region=${region}&district=${district}&locality=${locality}&rating=${rating}&reviews=${review}&averagePricePerNight=${price}&occupancy=${occupancy}&attributes=${attributes}&star=${star}`)
           .then(response => {
             this.updateTopCabins(response.data);
           })
@@ -326,10 +327,9 @@ ul {
 ul li {
   display: block;
   cursor: pointer;
-  border: 1px solid black;
+  border-bottom: 1px solid black;
   padding: 5px 10px;
   border-left: 0;
-  border-left: 1px solid black;
   margin-top: 10px;
 }
 

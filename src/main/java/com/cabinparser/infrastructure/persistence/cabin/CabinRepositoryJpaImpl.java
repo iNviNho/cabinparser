@@ -51,4 +51,10 @@ public class CabinRepositoryJpaImpl implements CabinRepository {
       .map(cabinJpaEntityMapper::toDomain);
   }
 
+  public Cabin getById(final int cabinId) {
+    return cabinJpaEntityMapper.toDomain(
+      this.cabinJpaRepository.findById(cabinId)
+    );
+  }
+
 }

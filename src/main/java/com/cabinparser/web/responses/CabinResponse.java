@@ -33,4 +33,5 @@ public class CabinResponse {
   private List<String> images;
   private BigDecimal occupancy;
   private List<String> attributes;
+  private boolean star;
 }

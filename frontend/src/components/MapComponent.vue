@@ -90,9 +90,10 @@ export default {
         review,
         price,
         occupancy,
-        attributes
+        attributes,
+        star
     ) {
-      client.get(`/cabins?region=${region}&district=${district}&locality=${locality}&rating=${rating}&reviews=${review}&averagePricePerNight=${price}&occupancy=${occupancy}&attributes=${attributes}`)
+      client.get(`/cabins?region=${region}&district=${district}&locality=${locality}&rating=${rating}&reviews=${review}&averagePricePerNight=${price}&occupancy=${occupancy}&attributes=${attributes}&star=${star}`)
           .then(response => {
             this.markers = response.data.map(cabin => {
               return {

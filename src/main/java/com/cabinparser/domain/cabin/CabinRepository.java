@@ -13,4 +13,6 @@ public interface CabinRepository {
   void store(final Cabin cabin);
 
   void update(final Cabin cabin);
+
+  Cabin getById(final int cabinId);
 }

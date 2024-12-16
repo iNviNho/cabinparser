@@ -8,8 +8,10 @@ import com.cabinparser.domain.cabinocupancy.CabinOccupancy;
 import com.cabinparser.domain.cabinocupancy.CabinOccupancyService;
 import com.cabinparser.web.mappers.CabinToCabinResponseMapper;
 import com.cabinparser.web.responses.CabinResponse;
+import io.micronaut.http.annotation.Body;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
+import io.micronaut.http.annotation.Patch;
 import jakarta.annotation.security.PermitAll;
 import jakarta.inject.Singleton;
 import java.math.BigDecimal;
@@ -44,7 +46,8 @@ public class CabinController {
     final String reviews,
     final String averagePricePerNight,
     final String occupancy,
-    final String attributes
+    final String attributes,
+    final boolean star
   ) {
     return cabinService.getSlovakCabinsByVendor(Constants.MEGAUBYTOVANIE)
       .stream()
@@ -58,6 +61,7 @@ public class CabinController {
         doNumericComparison(occupancy, cabin.getOccupancy().multiply(BigDecimal.valueOf(100))))
       .filter(cabin -> doStringComparison(attributes,
         cabin.getAttributes().stream().map(CabinAttributes::translation).collect(Collectors.toList())))
+      .filter(cabin -> cabin.isStar() == star)
       .map(cabinToCabinResponseMapper::toCabinResponse)
       .collect(Collectors.toList());
   }
@@ -71,6 +75,15 @@ public class CabinController {
       LocalDate.now().minusMonths(12),
       LocalDate.now().plusMonths(12)
     );
+  }
+
+  @Patch("/cabins/{cabinId}")
+  public CabinResponse toggleCabinStar(
+    final String cabinId,
+    @Body("star") final boolean star
+  ) {
+    final Cabin cabin = cabinService.toggleCabinStar(Integer.parseInt(cabinId), star);
+    return cabinToCabinResponseMapper.toCabinResponse(cabin);
   }
 
   @Get("/cabin-attributes")

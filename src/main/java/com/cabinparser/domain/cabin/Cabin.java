@@ -61,6 +61,8 @@ public class Cabin {
 
   private List<CabinAttributes> attributes;
 
+  private boolean star;
+
   public boolean isCabinPartOfComplex() {
     return name.contains("|");
   }

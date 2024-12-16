@@ -1,7 +1,10 @@
 import {createApp} from 'vue/dist/vue.esm-bundler'
 import App from './App.vue'
-import VueCarousel from '@chenfengyuan/vue-carousel'
+import { createVfm } from 'vue-final-modal'
 
 const app = createApp(App);
-app.component(VueCarousel.name, VueCarousel);
-app.mount('#app');
+const vfm = createVfm()
+
+app
+    .use(vfm)
+    .mount('#app');

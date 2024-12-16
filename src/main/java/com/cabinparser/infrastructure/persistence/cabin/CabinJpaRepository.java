@@ -15,5 +15,5 @@ public interface CabinJpaRepository extends CrudRepository<CabinJpaEntity, Long>
 
   Optional<CabinJpaEntity> findByVendorAndVendorUniqueIdAndName(final String vendor, final String vendorUniqueId,
                                                                 final String name);
-
+  CabinJpaEntity findById(int cabinId);
 }
