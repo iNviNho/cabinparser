@@ -1,4 +1,4 @@
-package com.cabinparser.application.schedulers;
+package com.cabinparser.application.schedulers.sub;
 
 import com.cabinparser.application.Constants;
 import com.cabinparser.domain.cabin.Cabin;
@@ -19,7 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Singleton
 @AllArgsConstructor
-public class TwoUpdateMegaubytovanieCabinOccupancyJob {
+public class SecondUpdateMegaubytovanieCabinOccupancyJob {
 
   private CabinService cabinService;
 
@@ -28,7 +28,7 @@ public class TwoUpdateMegaubytovanieCabinOccupancyJob {
   private WebApiMegaubytovanieApiClient webApiMegaubytovanieApiClient;
 
   // @Scheduled(initialDelay = "1s", fixedDelay = "1d")
-  void parse() {
+  public void parse() {
     log.info("Starting UpdateCabinOccupancyJob job");
     updateCabinOccupancy();
     log.info("Finished UpdateCabinOccupancyJob");

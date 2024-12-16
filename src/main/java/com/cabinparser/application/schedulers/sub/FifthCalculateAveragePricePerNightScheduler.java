@@ -1,14 +1,14 @@
-package com.cabinparser.application.schedulers;
+package com.cabinparser.application.schedulers.sub;
 
 import com.cabinparser.application.Constants;
 import com.cabinparser.domain.cabin.Cabin;
 import com.cabinparser.domain.cabin.CabinRepository;
 import com.cabinparser.domain.cabin.CabinService;
-import com.cabinparser.infrastructure.api.webapimegaubytovanie.AccommodationDetailResponse;
+import com.cabinparser.infrastructure.api.webapimegaubytovanie.CabinPriceListResponse;
 import com.cabinparser.infrastructure.api.webapimegaubytovanie.WebApiMegaubytovanieApiClient;
-import io.micronaut.context.annotation.Value;
 import jakarta.inject.Singleton;
 import java.time.Duration;
+import java.time.LocalDate;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 @Singleton
 @Slf4j
 @AllArgsConstructor
-public class SixthUpdateCabinAttributesScheduler {
+public class FifthCalculateAveragePricePerNightScheduler {
 
   CabinRepository cabinRepository;
 
@@ -24,29 +24,28 @@ public class SixthUpdateCabinAttributesScheduler {
 
   WebApiMegaubytovanieApiClient webApiMegaubytovanieApiClient;
 
-  @Value("${webapi.token}")
-  String webApiToken;
-
   // @Scheduled(initialDelay = "1s", fixedDelay = "1d")
-  void handle() {
+  public void parse() {
     final List<Cabin> cabins = cabinRepository.getByVendor(Constants.MEGAUBYTOVANIE);
     cabins.forEach(cabin -> {
       if (!cabin.isSlovakCabin()) {
         return;
       }
-
-      final AccommodationDetailResponse response = webApiMegaubytovanieApiClient.getAccommodationDetail(
-        "Bearer " + webApiToken,
-        cabin.getVendorUniqueId()
+      if (cabin.getAvgPricePerNight() != null) {
+        return;
+      }
+      final CabinPriceListResponse response = webApiMegaubytovanieApiClient.getCabinPriceList(
+        cabin.getVendorUniqueId(),
+        LocalDate.now()
       );
 
-      cabinService.processAccommodationDetailResponse(response, cabin);
+      cabinService.processCabinPriceList(response, cabin);
       try {
         Thread.sleep(Duration.ofMillis(250));
       } catch (final InterruptedException e) {
         throw new RuntimeException(e);
       }
     });
-    log.info("Updated cabin attributes for {} cabins", cabins.size());
+    log.info("Average price per night calculated for {} cabins", cabins.size());
   }
 }

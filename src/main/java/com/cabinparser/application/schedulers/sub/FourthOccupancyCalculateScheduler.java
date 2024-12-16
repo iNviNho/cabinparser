@@ -1,4 +1,4 @@
-package com.cabinparser.application.schedulers;
+package com.cabinparser.application.schedulers.sub;
 
 import com.cabinparser.application.Constants;
 import com.cabinparser.domain.cabin.CabinService;
@@ -13,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 @Singleton
 @Slf4j
 @RequiredArgsConstructor
-public class FourOccupancyCalculateScheduler {
+public class FourthOccupancyCalculateScheduler {
 
   @NonNull
   CabinService cabinService;
@@ -24,7 +24,7 @@ public class FourOccupancyCalculateScheduler {
   LocalDate cabinParserStartDate = LocalDate.of(2024, 10, 1);
 
   // @Scheduled(initialDelay = "1s")
-  public void calculateOccupancy() {
+  public void parse() {
     log.info("Calculating occupancy");
     cabinService.getSlovakCabinsByVendor(Constants.MEGAUBYTOVANIE).forEach(cabin -> {
       if (!cabin.lastCalendarUpdateIsOlderThanThreeMonths()) {

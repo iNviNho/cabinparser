@@ -1,4 +1,4 @@
-package com.cabinparser.application.schedulers;
+package com.cabinparser.application.schedulers.sub;
 
 import com.cabinparser.application.Constants;
 import com.cabinparser.domain.cabin.Cabin;
@@ -17,7 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Singleton
-public class ThreeUpdateDistrictRegionAndLocalityOfCabins {
+public class ThirdUpdateDistrictRegionAndLocalityOfCabins {
 
   protected ObjectMapper objectMapper = new ObjectMapper();
   @Inject
