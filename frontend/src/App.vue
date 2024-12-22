@@ -1,6 +1,8 @@
 <template>
   <div id="left-bar">
-    <h2>Chatkovač</h2>
+    <h2>
+      <a href="/" style="color: #FFF; text-decoration: none;">Chatkovač</a>
+    </h2>
     <div class="white-section"></div>
     <MainLeftBar @filters-changed="filtersChanged"></MainLeftBar>
   </div>
@@ -57,7 +59,25 @@ export default {
           filters.star,
           filters.numberOfRegularBeds,
           filters.numberOfBedrooms,
-      )
+      );
+      this.$router.push({query: filters});
+    },
+    createFiltersArray(filters) {
+      let filtersArray = [];
+      for (let key in filters) {
+        if (filters[key] !== null && filters[key] !== undefined) {
+          if (Array.isArray(filters[key])) {
+            filters[key].forEach(value => {
+              filtersArray.push(`${key}=${value}`);
+            });
+          } else {
+            filtersArray.push(`${key}=${filters[key]}`);
+          }
+        }
+      }
+      return {
+        "region": filters.region,
+      };
     }
   }
 }

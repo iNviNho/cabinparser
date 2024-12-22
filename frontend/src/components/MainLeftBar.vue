@@ -125,24 +125,28 @@ export default {
     formatPrice(value) {
       return value.toFixed(0) + '€';
     },
-    onRegionChange() {
-      client.get(`/locations/districts?region=${this.selectedRegion}`)
+    async onRegionChange(updateFilters = true) {
+      return client.get(`/locations/districts?region=${this.selectedRegion}`)
           .then(response => {
             this.districts = response.data;
             this.selectedDistrict = null;
             this.selectedLocality = null;
-            this.filtersChanged();
+            if (updateFilters) {
+              this.filtersChanged();
+            }
           })
           .catch(error => {
             console.log(error);
           });
     },
-    onDistrictChange() {
-      client.get(`/locations/localities?region=${this.selectedRegion}&district=${this.selectedDistrict}`)
+    async onDistrictChange(updateFilters = true) {
+      return client.get(`/locations/localities?region=${this.selectedRegion}&district=${this.selectedDistrict}`)
           .then(response => {
             this.localities = response.data;
             this.selectedLocality = null;
-            this.filtersChanged();
+            if (updateFilters) {
+              this.filtersChanged();
+            }
           })
           .catch(error => {
             console.log(error);
@@ -162,27 +166,52 @@ export default {
         numberOfRegularBeds: this.selectedNumberOfRegularBeds,
         numberOfBedrooms: this.selectedNumberOfBedrooms
       });
+    },
+    async resolveDefaultFilters() {
+      const urlParams = new URLSearchParams(window.location.search);
+      this.selectedRegion = urlParams.getAll('region').toString() === '' ? null : urlParams.getAll('region');
+      await this.onRegionChange(false);
+      this.selectedDistrict = urlParams.getAll('district').toString() === '' ? null : urlParams.getAll('district');
+      await this.onDistrictChange(false);
+      this.selectedLocality = urlParams.getAll('locality').toString() === '' ? null : urlParams.getAll('locality');
+      if (urlParams.get('rating') !== null) {
+        this.selectedRating = urlParams.getAll('rating');
+      }
+      if (urlParams.get('review') !== null) {
+        this.selectedReview = urlParams.getAll('review');
+      }
+      if (urlParams.get('price') !== null) {
+        this.selectedPrice = urlParams.getAll('price');
+      }
+      if (urlParams.get('occupancy') !== null) {
+        this.selectedOccupancy = urlParams.getAll('occupancy');
+      }
+      this.selectedAttributes = urlParams.getAll('attributes');
+      this.star = urlParams.get('star') === 'true';
+      if (urlParams.get('numberOfRegularBeds') !== null) {
+        this.selectedNumberOfRegularBeds = urlParams.getAll('numberOfRegularBeds');
+      }
+      if (urlParams.get('numberOfBedrooms') !== null) {
+        this.selectedNumberOfBedrooms = urlParams.getAll('numberOfBedrooms');
+      }
+      this.filtersChanged();
     }
   },
   created() {
-    client.get('/locations/regions')
-        .then(response => {
-          this.regions = response.data;
-          this.filtersChanged();
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    client.get('/cabin-attributes')
-        .then(response => {
-          this.availableAttributes = response.data.map(feature => {
-            return feature.translation;
-          });
-          this.filtersChanged();
-        })
-        .catch(error => {
-          console.log(error);
-        });
+    Promise.all([
+      client.get('/locations/regions'),
+      client.get('/cabin-attributes')
+    ])
+    .then(([regionsResponse, attributesResponse]) => {
+      this.regions = regionsResponse.data;
+      this.availableAttributes = attributesResponse.data.map(feature => {
+        return feature.translation;
+      });
+      this.resolveDefaultFilters();
+    })
+    .catch(error => {
+      console.log(error);
+    });
   }
 }
 
