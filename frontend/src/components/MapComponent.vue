@@ -11,7 +11,7 @@
           lat: marker.cabin.gpsPositionLatitude,
           lng: marker.cabin.gpsPositionLongitude
         },
-        icon: getIcon(marker.cabin.rating),
+        icon: getIcon(marker.cabin),
         title: marker.cabin.name
       }" @click="onMarkerClick(marker)"/>
     </GoogleMap>
@@ -68,7 +68,10 @@ export default {
     onMarkerClick(marker) {
       this.$emit('on-marker-click', marker.cabin);
     },
-    getIcon(rating) {
+    getIcon(cabin) {
+      const rating = cabin.rating;
+      const isStar = cabin.star;
+
       let icon;
       if (rating < 8) {
         icon = 'https://maps.gstatic.com/mapfiles/ms2/micons/red.png';
@@ -78,6 +81,10 @@ export default {
         icon = 'https://maps.gstatic.com/mapfiles/ms2/micons/lightblue.png';
       } else if (rating > 9.5) {
         icon = 'https://maps.gstatic.com/mapfiles/ms2/micons/green.png';
+      }
+
+      if (isStar) {
+        icon = '/placeholder.png';
       }
 
       return icon;
@@ -91,9 +98,11 @@ export default {
         price,
         occupancy,
         attributes,
-        star
+        star,
+        numberOfRegularBeds,
+        numberOfBedrooms
     ) {
-      client.get(`/cabins?region=${region}&district=${district}&locality=${locality}&rating=${rating}&reviews=${review}&averagePricePerNight=${price}&occupancy=${occupancy}&attributes=${attributes}&star=${star}`)
+      client.get(`/cabins?region=${region}&district=${district}&locality=${locality}&rating=${rating}&reviews=${review}&averagePricePerNight=${price}&occupancy=${occupancy}&attributes=${attributes}&star=${star}&numberOfRegularBeds=${numberOfRegularBeds}&numberOfBedrooms=${numberOfBedrooms}`)
           .then(response => {
             this.markers = response.data.map(cabin => {
               return {
