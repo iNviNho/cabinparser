@@ -37,6 +37,16 @@
               :step="5" @change="occupancyChanged"/>
     </div>
     <div class="inline-block" style="margin-bottom: 20px;">
+      <h3 style="margin-top: 20px; margin-bottom: 50px;">Pocet posteli</h3>
+      <Slider v-model="selectedNumberOfRegularBeds" :max="50" :min="0"
+              :step="1" @change="numberOfRegularBedsChanged"/>
+    </div>
+    <div class="inline-block" style="margin-bottom: 20px;">
+      <h3 style="margin-top: 20px; margin-bottom: 50px;">Pocet izieb</h3>
+      <Slider v-model="selectedNumberOfBedrooms" :max="15" :min="0"
+              :step="1" @change="numberOfBedroomsChanged"/>
+    </div>
+    <div class="inline-block" style="margin-bottom: 20px;">
       <h3>Vybavenost</h3>
       <multiselect v-model="selectedAttributes"
                    :options="availableAttributes"
@@ -80,9 +90,19 @@ export default {
       selectedAttributes: [],
       availableAttributes: [],
       star: false,
+      selectedNumberOfRegularBeds: [0, 50],
+      selectedNumberOfBedrooms: [0, 15],
     }
   },
   methods: {
+    numberOfRegularBedsChanged(selectedNumberOfRegularBeds) {
+      this.selectedNumberOfRegularBeds = selectedNumberOfRegularBeds;
+      this.filtersChanged();
+    },
+    numberOfBedroomsChanged(selectedNumberOfBedrooms) {
+      this.selectedNumberOfBedrooms = selectedNumberOfBedrooms;
+      this.filtersChanged();
+    },
     ratingChanged(selectedRating) {
       this.selectedRating = selectedRating;
       this.filtersChanged();
@@ -139,6 +159,8 @@ export default {
         occupancy: this.selectedOccupancy,
         attributes: this.selectedAttributes,
         star: this.star,
+        numberOfRegularBeds: this.selectedNumberOfRegularBeds,
+        numberOfBedrooms: this.selectedNumberOfBedrooms
       });
     }
   },

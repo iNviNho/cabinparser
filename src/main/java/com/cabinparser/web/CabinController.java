@@ -47,7 +47,9 @@ public class CabinController {
     final String averagePricePerNight,
     final String occupancy,
     final String attributes,
-    final boolean star
+    final boolean star,
+    final String numberOfRegularBeds,
+    final String numberOfBedrooms
   ) {
     return cabinService.getSlovakCabinsByVendor(Constants.MEGAUBYTOVANIE)
       .stream()
@@ -56,12 +58,14 @@ public class CabinController {
       .filter(cabin -> doStringComparison(locality, cabin.getLocality()))
       .filter(cabin -> doNumericComparison(rating, BigDecimal.valueOf(cabin.getRating())))
       .filter(cabin -> doNumericComparison(reviews, BigDecimal.valueOf(cabin.getReviewsCount())))
+      .filter(cabin -> doNumericComparison(numberOfRegularBeds, BigDecimal.valueOf(cabin.getRegularSleepingBeds())))
+      .filter(cabin -> doNumericComparison(numberOfBedrooms, BigDecimal.valueOf(cabin.getBedroomsCount())))
       .filter(cabin -> doNumericComparison(averagePricePerNight, cabin.getAvgPricePerNight()))
       .filter(cabin -> cabin.getOccupancy() != null &&
         doNumericComparison(occupancy, cabin.getOccupancy().multiply(BigDecimal.valueOf(100))))
       .filter(cabin -> doStringComparison(attributes,
         cabin.getAttributes().stream().map(CabinAttributes::translation).collect(Collectors.toList())))
-      .filter(cabin -> cabin.isStar() == star)
+      .filter(cabin -> !star || cabin.isStar())
       .map(cabinToCabinResponseMapper::toCabinResponse)
       .collect(Collectors.toList());
   }

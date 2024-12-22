@@ -42,6 +42,8 @@ export default {
           filters.occupancy,
           filters.attributes,
           filters.star,
+          filters.numberOfRegularBeds,
+          filters.numberOfBedrooms,
       );
       this.$refs.mainAnalysis.filtersChanged(
           filters.region,
@@ -53,6 +55,8 @@ export default {
           filters.occupancy,
           filters.attributes,
           filters.star,
+          filters.numberOfRegularBeds,
+          filters.numberOfBedrooms,
       )
     }
   }
