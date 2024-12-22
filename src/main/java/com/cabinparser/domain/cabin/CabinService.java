@@ -3,6 +3,7 @@ package com.cabinparser.domain.cabin;
 import com.cabinparser.infrastructure.api.webapimegaubytovanie.AccommodationDetailResponse;
 import com.cabinparser.infrastructure.api.webapimegaubytovanie.CabinPriceListResponse;
 import io.micronaut.cache.annotation.CacheConfig;
+import io.micronaut.cache.annotation.CacheInvalidate;
 import io.micronaut.cache.annotation.Cacheable;
 import jakarta.inject.Singleton;
 import java.math.BigDecimal;
@@ -55,6 +56,7 @@ public class CabinService {
       .collect(Collectors.toList());
   }
 
+  @CacheInvalidate(all = true)
   public Cabin toggleCabinStar(int cabinId, boolean star) {
     final Cabin cabin = cabinRepository.getById(cabinId);
     cabin.setStar(star);
