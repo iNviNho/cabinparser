@@ -177,7 +177,6 @@ export default {
             //   "created_at": 1730322972.41378
             // }]
             // we need to group by year and month and count how many times it appears
-
             let grouped;
             let labels;
             if (this.selectedOption == 'Mesacne') {
@@ -222,7 +221,6 @@ export default {
                 return key.split('-').join('-');
               });
             }
-
 
             this.chartData = {
               labels: labels,

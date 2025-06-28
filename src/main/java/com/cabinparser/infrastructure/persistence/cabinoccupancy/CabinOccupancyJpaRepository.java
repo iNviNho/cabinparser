@@ -17,7 +17,7 @@ public interface CabinOccupancyJpaRepository extends CrudRepository<CabinOccupan
   int getNumberOfOccupanciesByCabinIdAndDateRange(int cabinId, LocalDate startDate, LocalDate endDate);
 
   @Query(
-    value = "SELECT * FROM cabin_occupancy WHERE cabin_id = :cabinId AND date BETWEEN :startDate AND :endDate")
+    value = "SELECT * FROM cabin_occupancy WHERE cabin_id = :cabinId AND date BETWEEN :startDate AND :endDate ORDER BY date ASC")
   List<CabinOccupancyJpaEntity> getCabinOccupanciesByCabinIdAndDateRange(int cabinId, LocalDate startDate,
                                                                          LocalDate endDate);
 

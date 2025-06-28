@@ -44,7 +44,7 @@ public interface CabinJpaEntityMapper {
     final ObjectMapper objectMapper = new ObjectMapper();
     final List<CabinAttributes> result;
     if (value == null) {
-      return null;
+      return List.of();
     }
     try {
       result = Arrays.asList(objectMapper.readValue(value, CabinAttributes[].class));

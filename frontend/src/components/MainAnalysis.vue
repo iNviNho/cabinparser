@@ -207,10 +207,10 @@ export default {
         } : {totalOccupancy: cabin.occupancy, count: 1};
         return acc;
       }, {}))
-          .map(([key, value]) => ({key, value: (value.totalOccupancy / value.count * 100).toFixed(2)}))
-          .sort((a, b) => b.value - a.value)
-          .map(({key, value}) => ({key, value: value + '%'}))
-          .slice(0, this.desiredResultSize);
+        .map(([key, value]) => ({key, value: {value: (value.totalOccupancy / value.count * 100).toFixed(2), count: value.count}}))
+        .sort((a, b) => b.value.value - a.value.value)
+        .map(({key, value}) => ({key: key, value: value.value + '%' + " - [" + value.count + "chat]"}))
+        .slice(0, this.desiredResultSize);
       this.monthlyIncome = Object.entries(cabins.reduce((acc, cabin) => {
         const key = this.getKey(this.desiredGroupBy, cabin);
         if (cabin.occupancy === 0 || cabin.occupancy === undefined || cabin.avgPricePerNight === undefined ||
@@ -224,10 +224,10 @@ export default {
         } : {monthlyIncome: (cabin.avgPricePerNight * cabin.occupancy * 30), count: 1};
         return acc;
       }, {}))
-          .map(([key, value]) => ({key, value: (value.monthlyIncome / value.count).toFixed(2)}))
-          .sort((a, b) => b.value - a.value)
-          .map(({key, value}) => ({key, value: value + '€'}))
-          .slice(0, this.desiredResultSize);
+        .map(([key, value]) => ({key, value: {value: (value.monthlyIncome / value.count).toFixed(2), count: value.count}}))
+        .sort((a, b) => b.value.value - a.value.value)
+        .map(({key, value}) => ({key: key, value: value.value + '€' + " - [" + value.count + "chat]"}))
+        .slice(0, this.desiredResultSize);
       this.pricePerNight = Object.entries(cabins.reduce((acc, cabin) => {
         const key = this.getKey(this.desiredGroupBy, cabin);
         if (cabin.avgPricePerNight === undefined || cabin.avgPricePerNight === 0) {
@@ -240,10 +240,10 @@ export default {
         } : {pricePerNight: cabin.avgPricePerNight / cabin.maxPerson, count: 1};
         return acc;
       }, {}))
-          .map(([key, value]) => ({key, value: (value.pricePerNight / value.count).toFixed(2)}))
-          .sort((a, b) => b.value - a.value)
-          .map(({key, value}) => ({key, value: value + '€'}))
-          .slice(0, this.desiredResultSize);
+        .map(([key, value]) => ({key, value: {value: (value.pricePerNight / value.count).toFixed(2), count: value.count}}))
+        .sort((a, b) => b.value.value - a.value.value)
+        .map(({key, value}) => ({key: key, value: value.value + '€' + " - [" + value.count + "chat]"}))
+        .slice(0, this.desiredResultSize);
       this.occupancyPerCabinSize = Object.entries(cabins.reduce((acc, cabin) => {
         const key = cabin.bedroomsCount;
 
@@ -257,10 +257,10 @@ export default {
         } : {occupancy: cabin.occupancy, count: 1};
         return acc;
       }, {}))
-          .map(([key, value]) => ({key, value: (value.occupancy / value.count * 100).toFixed(2)}))
-          .sort((a, b) => b.value - a.value)
-          .map(({key, value}) => ({key, value: value + '%'}))
-          .slice(0, this.desiredResultSize);
+        .map(([key, value]) => ({key, value: {value: (value.occupancy / value.count * 100).toFixed(2), count: value.count}}))
+        .sort((a, b) => b.value.value - a.value.value)
+        .map(({key, value}) => ({key: key, value: value.value + '%' + " - [" + value.count + "chat]"}))
+        .slice(0, this.desiredResultSize);
       this.occupancyPerCabinRegularSleepingBeds = Object.entries(cabins.reduce((acc, cabin) => {
         const key = cabin.regularSleepingBeds;
 
@@ -274,10 +274,10 @@ export default {
         } : {occupancy: cabin.occupancy, count: 1};
         return acc;
       }, {}))
-          .map(([key, value]) => ({key, value: (value.occupancy / value.count * 100).toFixed(2)}))
-          .sort((a, b) => b.value - a.value)
-          .map(({key, value}) => ({key, value: value + '%'}))
-          .slice(0, this.desiredResultSize);
+        .map(([key, value]) => ({key, value: {value: (value.occupancy / value.count * 100).toFixed(2), count: value.count}}))
+        .sort((a, b) => b.value.value - a.value.value)
+        .map(({key, value}) => ({key: key, value: value.value + '%' + " - [" + value.count + "chat]"}))
+        .slice(0, this.desiredResultSize);
     },
     getKey(desiredGroupBy, cabin) {
       switch (desiredGroupBy) {
