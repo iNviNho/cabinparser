@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="main-analysis-stats">
-      <ul>
+      <ul >
         <h4 style="margin-bottom: 17px; margin-top: 40px;">Statistika podla chat</h4>
         <li :class="activeComponent === 'topCabinsByRating' ? 'active' : ''"
             @click="changeActiveComponent('topCabinsByRating')">Top podla ratingu
@@ -47,6 +47,10 @@
         <li :class="activeComponent === 'occupancyPerCabinRegularSleepingBeds' ? 'active' : ''"
             @click="changeActiveComponent('occupancyPerCabinRegularSleepingBeds')">Obsadenost podla poctu posteli
         </li>
+        <h4 style="margin-bottom: 17px; margin-top: 40px;">Statistika nehnutelnosti</h4>
+        <li :class="activeComponent === 'topPropertyByPrice' ? 'active' : ''"
+            @click="changeActiveComponent('topPropertyByPrice')">Top podla ceny
+        </li>
         <br style="clear: both;">
       </ul>
     </div>
@@ -63,6 +67,10 @@
         </option>
       </select>
       <br style="clear: both;">
+      <PropertyView
+        v-if="topPropertiesByPrice.length > 0 && activeComponent === 'topPropertyByPrice'"
+        :data="topPropertiesByPrice" @on-property-click="onPropertyClick"
+      ></PropertyView>
       <TableView v-if="topCabinsByRating.length > 0 && activeComponent === 'topCabinsByRating'"
                  :data="topCabinsByRating" @on-cabin-click="onCabinClick"></TableView>
       <TableView v-if="topCabinsByReviews.length > 0 && activeComponent === 'topCabinsByReviews'"
@@ -116,11 +124,12 @@
 
 import client from "@/services/client";
 import TableView from "@/components/TableView.vue";
+import PropertyView from "@/components/PropertyView.vue";
 import SimpleTableView from "@/components/SimpleTableView.vue";
 
 export default {
   name: 'MainAnalysis',
-  components: {TableView, SimpleTableView},
+  components: {TableView, SimpleTableView, PropertyView},
   data() {
     return {
       activeComponent: 'topCabinsByRating',
@@ -144,6 +153,9 @@ export default {
       pricePerNight: [],
       occupancyPerCabinSize: [],
       occupancyPerCabinRegularSleepingBeds: [],
+      showCabinsForSale: true,
+      showPropertiesForSale: true,
+      topPropertiesByPrice: []
     }
   },
   methods: {
@@ -152,6 +164,12 @@ export default {
     },
     onCabinClick(cabin) {
       this.$emit('on-cabin-click', cabin);
+    },
+    onPropertyClick(property) {
+      this.$emit('on-property-click', property);
+    },
+    updatePropertiesForSale(properties) {
+      this.topPropertiesByPrice = properties.sort((a, b) => b.price - a.price).slice(0, this.desiredResultSize);
     },
     updateTopCabins(cabins) {
       this.cabins = cabins;
@@ -302,15 +320,35 @@ export default {
         attributes,
         star,
         numberOfRegularBeds,
-        numberOfBedrooms
+        numberOfBedrooms,
+        showCabinsForRent,
+        showPropertiesForSale,
+        propertyForSale,
     ) {
-      client.get(`/cabins?region=${region}&district=${district}&locality=${locality}&rating=${rating}&reviews=${review}&averagePricePerNight=${price}&occupancy=${occupancy}&attributes=${attributes}&star=${star}&numberOfRegularBeds=${numberOfRegularBeds}&numberOfBedrooms=${numberOfBedrooms}`)
+      this.showCabinsForSale = showCabinsForRent;
+      this.showPropertiesForSale = showPropertiesForSale;
+      if (showCabinsForRent) {
+        client.get(`/cabins?region=${region}&district=${district}&locality=${locality}&rating=${rating}&reviews=${review}&averagePricePerNight=${price}&occupancy=${occupancy}&attributes=${attributes}&star=${star}&numberOfRegularBeds=${numberOfRegularBeds}&numberOfBedrooms=${numberOfBedrooms}`)
+            .then(response => {
+              this.updateTopCabins(response.data);
+            })
+            .catch(error => {
+              console.log(error);
+            });
+      } else {
+        this.updateTopCabins([]);
+      }
+      if (showPropertiesForSale) {
+        client.get(`/properties-for-sale?region=${region}&district=${district}&locality=${locality}&propertyForSale=${propertyForSale}`)
           .then(response => {
-            this.updateTopCabins(response.data);
+            this.updatePropertiesForSale(response.data);
           })
           .catch(error => {
             console.log(error);
           });
+      } else {
+        this.updatePropertiesForSale([]);
+      }
     }
   }
 }

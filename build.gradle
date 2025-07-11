@@ -96,6 +96,8 @@ dependencies {
 
     implementation("io.micronaut.cache:micronaut-cache-ehcache")
 
+    implementation("org.jsoup:jsoup:1.21.1")
+
     runtimeOnly("ch.qos.logback:logback-classic:$logbackClassicVersion")
     runtimeOnly("net.logstash.logback:logstash-logback-encoder:$logstashLogbackEncoderVersion")
     runtimeOnly("org.postgresql:postgresql:$postgresVersion")

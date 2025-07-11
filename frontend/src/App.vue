@@ -1,7 +1,7 @@
 <template>
   <div id="left-bar">
     <h2>
-      <a href="/" style="color: #FFF; text-decoration: none;">Chatkovač</a>
+      <a href="/" style="color: #FFF; text-decoration: none;">Realitkač</a>
     </h2>
     <div class="white-section"></div>
     <MainLeftBar @filters-changed="filtersChanged"></MainLeftBar>
@@ -9,8 +9,9 @@
   <div id="right-rest-of-the-screen">
     <MapComponent ref="map" @on-marker-click="showCabin"></MapComponent>
     <CabinView ref="cabinView"></CabinView>
+    <CabinForSaleView ref="cabinForSaleView"></CabinForSaleView>
     <div>
-      <MainAnalysis ref="mainAnalysis" @on-cabin-click="showCabin"></MainAnalysis>
+      <MainAnalysis ref="mainAnalysis" @on-cabin-click="showCabin" @on-property-click="showProperty"></MainAnalysis>
     </div>
   </div>
 </template>
@@ -20,6 +21,7 @@ import MapComponent from './components/MapComponent.vue'
 import MainLeftBar from './components/MainLeftBar.vue'
 import MainAnalysis from './components/MainAnalysis.vue'
 import CabinView from './components/CabinView.vue'
+import CabinForSaleView from "./components/CabinForSaleView.vue";
 
 export default {
   name: 'App',
@@ -27,11 +29,19 @@ export default {
     MapComponent,
     MainLeftBar,
     MainAnalysis,
-    CabinView
+    CabinView,
+    CabinForSaleView
   },
   methods: {
-    showCabin(cabin) {
-      this.$refs.cabinView.showCabin(cabin);
+    showCabin(marker) {
+      if (marker.cabin != null) {
+        this.$refs.cabinView.showCabin(marker.cabin);
+      } else {
+        this.$refs.cabinForSaleView.showCabinForSale(marker.cabinForSale);
+      }
+    },
+    showProperty(property) {
+      this.$refs.cabinForSaleView.showCabinForSale(property);
     },
     filtersChanged(filters) {
       this.$refs.map.filtersChanged(
@@ -46,6 +56,9 @@ export default {
           filters.star,
           filters.numberOfRegularBeds,
           filters.numberOfBedrooms,
+          filters.showCabinsForRent,
+          filters.showPropertiesForSale,
+          filters.propertyForSale
       );
       this.$refs.mainAnalysis.filtersChanged(
           filters.region,
@@ -59,6 +72,9 @@ export default {
           filters.star,
           filters.numberOfRegularBeds,
           filters.numberOfBedrooms,
+          filters.showCabinsForRent,
+          filters.showPropertiesForSale,
+          filters.propertyForSale
       );
       this.$router.push({query: filters});
     },

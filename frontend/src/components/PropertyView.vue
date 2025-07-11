@@ -4,36 +4,33 @@
       <table>
         <tr>
           <th class="fix-name-column">Nazov</th>
-          <th>Rating</th>
-          <th>Hodnotenia</th>
+          <th class="fix-region-column">Typ</th>
           <th class="fix-region-column">Kraj</th>
-          <th>Okres</th>
-          <th>Lokalita</th>
-          <th>Cena za noc</th>
-          <th>Obsadenost</th>
-          <th>Mesacny prijem</th>
+          <th class="fix-region-column">Okres</th>
+          <th class="fix-region-column">Lokalita</th>
+          <th class="fix-region-column">Pozemok</th>
+          <th class="fix-region-column">Zastavana plocha</th>
+          <th class="fix-region-column">Uzitkova plocha</th>
+          <th class="fix-region-column">Cena</th>
         </tr>
-        <tr v-for="cabin in data" :key="cabin.name">
+        <tr v-for="cabin in data" :key="cabin.title">
           <td class="fix-name-column">
-            <a :href="'https://megaubytovanie.sk/'+cabin.urlFragment"
+            <a :href="cabin.link"
                style="color: black;"
                target="_blank"><img src="/external.png"
                                     width="15px"></a> |
-            <span class="showcabinp" @click="showCabin(cabin)">
-              {{ cabin.name }}
+            <span class="showcabinp" @click="showProperty(cabin)">
+              {{ cabin.title }}
             </span>
           </td>
-          <td>{{ cabin.rating }}</td>
-          <td>{{ cabin.reviewsCount }}</td>
+          <td>{{ cabin.category }}</td>
           <td>{{ cabin.region }}</td>
           <td>{{ cabin.district }}</td>
           <td>{{ cabin.locality }}</td>
-          <td>{{ cabin.avgPricePerNight }}€</td>
-          <td>{{ cabin.occupancy != null ? (cabin.occupancy * 100).toFixed(2) + '%' : '-' }}</td>
-          <td>{{
-              cabin.occupancy != null ? (cabin.avgPricePerNight * cabin.occupancy * 30).toFixed(2) + '€' : '-'
-            }}
-          </td>
+          <td>{{ cabin.estate }}m²</td>
+          <td>{{ cabin.houseEstate }}m²</td>
+          <td>{{ cabin.floorEstate }}m²</td>
+          <td>{{ cabin.price.toLocaleString('fr-FR') }}€</td>
         </tr>
       </table>
     </div>
@@ -48,8 +45,8 @@ export default {
     data: Array,
   },
   methods: {
-    showCabin(cabin) {
-      this.$emit('on-cabin-click', cabin);
+    showProperty(property) {
+      this.$emit('on-property-click', property);
     }
   }
 }

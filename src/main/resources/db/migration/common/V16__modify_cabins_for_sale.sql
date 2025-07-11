@@ -1,0 +1,3 @@
+ALTER TABLE cabins_for_sale
+    ADD COLUMN link TEXT,
+    ADD COLUMN deleted_at TIMESTAMP DEFAULT NULL;

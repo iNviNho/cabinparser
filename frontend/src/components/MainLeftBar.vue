@@ -19,42 +19,61 @@
                    :placeholder="'Vyber'"
                    :selectLabel="''" multiple @remove="filtersChanged" @select="filtersChanged"></multiselect>
     </div>
-    <div class="inline-block">
-      <h3 style="margin-bottom: 50px;">Rating</h3>
-      <Slider v-model="selectedRating" :format="'decimals'" :max="10" :min="0" :step="0.5" @change="ratingChanged"/>
+    <div class="white-section" style="margin-top: 30px;"></div>
+    <div>
+      <h5 class="subtitle"><input type="checkbox" v-model="showCabinsForRent" @change="filtersChanged"> Chaty na prenajom</h5>
     </div>
-    <div class="inline-block">
-      <h3 style="margin-top: 20px; margin-bottom: 50px;">Hodnotenia</h3>
-      <Slider v-model="selectedReview" :format="'decimals'" :max="200" :min="0" :step="5" @change="reviewChanged"/>
+    <div v-if="showCabinsForRent">
+      <div class="inline-block">
+        <h3 style="margin-bottom: 50px;">Rating</h3>
+        <Slider v-model="selectedRating" :format="'decimals'" :max="10" :min="0" :step="0.5" @change="ratingChanged"/>
+      </div>
+      <div class="inline-block">
+        <h3 style="margin-top: 20px; margin-bottom: 50px;">Hodnotenia</h3>
+        <Slider v-model="selectedReview" :format="'decimals'" :max="200" :min="0" :step="5" @change="reviewChanged"/>
+      </div>
+      <div class="inline-block">
+        <h3 style="margin-top: 20px; margin-bottom: 50px;">Cena za noc</h3>
+        <Slider v-model="selectedPrice" :format="formatPrice" :max="2500" :min="0" :step="50" @change="priceChanged"/>
+      </div>
+      <div class="inline-block">
+        <h3 style="margin-top: 20px; margin-bottom: 50px;">Obsadenost</h3>
+        <Slider v-model="selectedOccupancy" :format="formatPercentage" :max="100" :min="0"
+                :step="5" @change="occupancyChanged"/>
+      </div>
+      <div class="inline-block" style="margin-bottom: 20px;">
+        <h3 style="margin-top: 20px; margin-bottom: 50px;">Pocet posteli</h3>
+        <Slider v-model="selectedNumberOfRegularBeds" :max="50" :min="0"
+                :step="1" @change="numberOfRegularBedsChanged"/>
+      </div>
+      <div class="inline-block" style="margin-bottom: 20px;">
+        <h3 style="margin-top: 20px; margin-bottom: 50px;">Pocet izieb</h3>
+        <Slider v-model="selectedNumberOfBedrooms" :max="15" :min="0"
+                :step="1" @change="numberOfBedroomsChanged"/>
+      </div>
+      <div class="inline-block" style="margin-bottom: 20px;">
+        <h3>Vybavenost</h3>
+        <multiselect v-model="selectedAttributes"
+                     :options="availableAttributes"
+                     :placeholder="'Vyber'"
+                     :selectLabel="''" multiple @remove="filtersChanged" @select="filtersChanged"></multiselect>
+      </div>
+      <div class="inline-block" style="margin-bottom: 40px;">
+        <h3><input type="checkbox" v-model="star" @change="filtersChanged"> Oblubene</h3>
+      </div>
     </div>
-    <div class="inline-block">
-      <h3 style="margin-top: 20px; margin-bottom: 50px;">Cena za noc</h3>
-      <Slider v-model="selectedPrice" :format="formatPrice" :max="2500" :min="0" :step="50" @change="priceChanged"/>
-    </div>
-    <div class="inline-block">
-      <h3 style="margin-top: 20px; margin-bottom: 50px;">Obsadenost</h3>
-      <Slider v-model="selectedOccupancy" :format="formatPercentage" :max="100" :min="0"
-              :step="5" @change="occupancyChanged"/>
-    </div>
-    <div class="inline-block" style="margin-bottom: 20px;">
-      <h3 style="margin-top: 20px; margin-bottom: 50px;">Pocet posteli</h3>
-      <Slider v-model="selectedNumberOfRegularBeds" :max="50" :min="0"
-              :step="1" @change="numberOfRegularBedsChanged"/>
-    </div>
-    <div class="inline-block" style="margin-bottom: 20px;">
-      <h3 style="margin-top: 20px; margin-bottom: 50px;">Pocet izieb</h3>
-      <Slider v-model="selectedNumberOfBedrooms" :max="15" :min="0"
-              :step="1" @change="numberOfBedroomsChanged"/>
-    </div>
-    <div class="inline-block" style="margin-bottom: 20px;">
-      <h3>Vybavenost</h3>
-      <multiselect v-model="selectedAttributes"
-                   :options="availableAttributes"
-                   :placeholder="'Vyber'"
-                   :selectLabel="''" multiple @remove="filtersChanged" @select="filtersChanged"></multiselect>
-    </div>
-    <div class="inline-block" style="margin-bottom: 40px;">
-      <h3><input type="checkbox" v-model="star" @change="filtersChanged"> Oblubene</h3>
+    <div class="white-section" style="margin-top: 30px;"></div>
+    <div>
+      <h5 class="subtitle"><input type="checkbox" v-model="showPropertiesForSale" @change="filtersChanged"> Nehnutelnosti na predaj</h5>
+      <div v-if="showPropertiesForSale">
+        <div class="inline-block">
+        <h3>Typ</h3>
+        <multiselect v-model="selectedPropertyForSale"
+                     :hideSelected="true" :options="propertyForSaleTypes"
+                     :placeholder="'Vyber'"
+                     :selectLabel="''" multiple @remove="onPropertyForSaleChange" @select="onPropertyForSaleChange"></multiselect>
+      </div>
+      </div>
     </div>
   </div>
 </template>
@@ -92,6 +111,15 @@ export default {
       star: false,
       selectedNumberOfRegularBeds: [0, 50],
       selectedNumberOfBedrooms: [0, 15],
+      showCabinsForRent: true,
+      showPropertiesForSale: true,
+      selectedPropertyForSale: null,
+      propertyForSaleTypes: [
+        "CHATA_NA_PREDAJ",
+        "DOM_NA_PREDAJ",
+        "REKREACNY_POZEMOK",
+        "STAVEBNY_POZEMOK",
+      ],
     }
   },
   methods: {
@@ -124,6 +152,9 @@ export default {
     },
     formatPrice(value) {
       return value.toFixed(0) + '€';
+    },
+    async onPropertyForSaleChange() {
+      this.filtersChanged();
     },
     async onRegionChange(updateFilters = true) {
       return client.get(`/locations/districts?region=${this.selectedRegion}`)
@@ -164,7 +195,10 @@ export default {
         attributes: this.selectedAttributes,
         star: this.star,
         numberOfRegularBeds: this.selectedNumberOfRegularBeds,
-        numberOfBedrooms: this.selectedNumberOfBedrooms
+        numberOfBedrooms: this.selectedNumberOfBedrooms,
+        showCabinsForRent: this.showCabinsForRent,
+        showPropertiesForSale: this.showPropertiesForSale,
+        propertyForSale: this.selectedPropertyForSale,
       });
     },
     async resolveDefaultFilters() {
@@ -251,5 +285,10 @@ export default {
   color: #000;
   transition: border-color 0.2s;
   margin-bottom: 7px;
+}
+
+.subtitle {
+  text-align: left;
+  padding-left: 15px;
 }
 </style>

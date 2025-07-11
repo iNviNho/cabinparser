@@ -23,6 +23,9 @@ micronaut:
       google-maps-client:
         url: https://maps.googleapis.com
         read-timeout: 10s
+      topreality-api-client:
+        url: https://topreality.sk
+        read-timeout: 10s
 
 datasources:
   default:
