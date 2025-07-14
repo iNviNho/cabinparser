@@ -68,7 +68,7 @@ public class FetchAndProcessTopRealityCabinsForSale {
         try {
             final Document cabinDoc = Jsoup.connect(cabinUrl).get();
             final var title = cabinDoc.select(".container .contentDetail h1").text();
-            final var price = cabinDoc.select(".container .contentDetail .gallery-info > .row .properties .priceContainer .price")
+            var price = cabinDoc.select(".container .contentDetail .gallery-info > .row .properties .priceContainer .price")
               .text();
             final var locality = getAttribute(cabinDoc, "Lokalita");
             final var updatedAt = getAttribute(cabinDoc, "Aktualiz");
@@ -107,6 +107,23 @@ public class FetchAndProcessTopRealityCabinsForSale {
                 false,
                 category
             );
+
+            // price is for m2
+            if (price.contains("m2") && (
+                category.equals("REKREACNY_POZEMOK") ||
+                category.equals("STAVEBNY_POZEMOK")
+            )) {
+              // remove EUR/m2
+              price = price.replace("EUR/m2", "").trim();
+              // remove €/m2
+              price = price.replace("€/m2", "").trim();
+              // replace , for .
+              price = price.replace(",", ".");
+
+              // and multiply with estate sq m
+              cabinForSale.setPrice((new BigDecimal(price)).multiply(cabinForSale.getEstate()));
+            }
+
             final var cabinForSaleExisting = propertyForSaleRepository.getByLink(cabinForSale.getLink());
             if (cabinForSaleExisting.isPresent()) {
 
