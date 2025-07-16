@@ -105,7 +105,10 @@ public class FetchAndProcessTopRealityCabinsForSale {
                 cabinUrl,
                 null,
                 false,
-                category
+                category,
+                null,
+                null,
+                null
             );
 
             // price is for m2

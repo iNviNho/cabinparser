@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="main-analysis-stats">
-      <ul >
+      <ul v-if="showCabinForRent">
         <h4 style="margin-bottom: 17px; margin-top: 40px;">Statistika podla chat</h4>
         <li :class="activeComponent === 'topCabinsByRating' ? 'active' : ''"
             @click="changeActiveComponent('topCabinsByRating')">Top podla ratingu
@@ -21,6 +21,8 @@
         <li :class="activeComponent === 'topCabinsByOccupancy' ? 'active' : ''"
             @click="changeActiveComponent('topCabinsByOccupancy')">Top podla obsadenosti
         </li>
+      </ul>
+      <ul v-if="showCabinForRent">
         <h4 style="margin-bottom: 0;">Statistika podla krajov/okresov a miest</h4>
         <li :class="activeComponent === 'cabinsCount' ? 'active' : ''"
             @click="changeActiveComponent('cabinsCount')">Pocet chat
@@ -40,6 +42,8 @@
         <li :class="activeComponent === 'pricePerNight' ? 'active' : ''"
             @click="changeActiveComponent('pricePerNight')">Cena za osobu/noc
         </li>
+      </ul>
+      <ul v-if="showCabinForRent">
         <h4 style="margin-bottom: 0;">Jednotliva statistika</h4>
         <li :class="activeComponent === 'occupancyPerCabinSize' ? 'active' : ''"
             @click="changeActiveComponent('occupancyPerCabinSize')">Obsadenost podla poctu izieb
@@ -47,15 +51,20 @@
         <li :class="activeComponent === 'occupancyPerCabinRegularSleepingBeds' ? 'active' : ''"
             @click="changeActiveComponent('occupancyPerCabinRegularSleepingBeds')">Obsadenost podla poctu posteli
         </li>
+      </ul>
+      <ul v-if="showPropertiesForSale">
         <h4 style="margin-bottom: 17px; margin-top: 40px;">Statistika nehnutelnosti</h4>
-        <li :class="activeComponent === 'topPropertyByPrice' ? 'active' : ''"
-            @click="changeActiveComponent('topPropertyByPrice')">Top podla ceny
+        <li :class="activeComponent === 'topPropertyByPriceDesc' ? 'active' : ''"
+            @click="changeActiveComponent('topPropertyByPriceDesc')">Top podla ceny zostupne
+        </li>
+        <li :class="activeComponent === 'topPropertyByPriceAsc' ? 'active' : ''"
+            @click="changeActiveComponent('topPropertyByPriceAsc')">Top podla ceny vzostupne
         </li>
         <br style="clear: both;">
       </ul>
     </div>
     <div class="main-analysis-content">
-      <select id="desiredResultSelect" v-model="desiredResultSize" @change="updateTopCabins(this.cabins)">
+      <select id="desiredResultSelect" v-model="desiredResultSize" @change="updateTopCabins(this.cabins); updatePropertiesForSale(this.propertiesForSale)">
         <option v-for="option in desiredResultSizeOptions" :key="option" :value="option"
         >{{ option }}
         </option>
@@ -68,8 +77,12 @@
       </select>
       <br style="clear: both;">
       <PropertyView
-        v-if="topPropertiesByPrice.length > 0 && activeComponent === 'topPropertyByPrice'"
-        :data="topPropertiesByPrice" @on-property-click="onPropertyClick"
+        v-if="topPropertiesByPriceDesc.length > 0 && activeComponent === 'topPropertyByPriceDesc'"
+        :data="topPropertiesByPriceDesc" @on-property-click="onPropertyClick"
+      ></PropertyView>
+      <PropertyView
+        v-if="topPropertiesByPriceAsc.length > 0 && activeComponent === 'topPropertyByPriceAsc'"
+        :data="topPropertiesByPriceAsc" @on-property-click="onPropertyClick"
       ></PropertyView>
       <TableView v-if="topCabinsByRating.length > 0 && activeComponent === 'topCabinsByRating'"
                  :data="topCabinsByRating" @on-cabin-click="onCabinClick"></TableView>
@@ -134,7 +147,7 @@ export default {
     return {
       activeComponent: 'topCabinsByRating',
       cabins: [],
-      desiredResultSizeOptions: [5, 10, 25, 50, 100],
+      desiredResultSizeOptions: [5, 10, 25, 50, 100, 250],
       componentsThatNeedGroupBy: ['cabinsCount', 'dailyVisits', 'dailyCapacity', 'occupancy', 'monthlyIncome', 'pricePerNight'],
       desiredGroupByOptions: ['Region', 'Okres', 'Lokalita'],
       desiredResultSize: 25,
@@ -153,9 +166,11 @@ export default {
       pricePerNight: [],
       occupancyPerCabinSize: [],
       occupancyPerCabinRegularSleepingBeds: [],
-      showCabinsForSale: true,
+      showCabinForRent: true,
       showPropertiesForSale: true,
-      topPropertiesByPrice: []
+      propertiesForSale: [],
+      topPropertiesByPriceDesc: [],
+      topPropertiesByPriceAsc: []
     }
   },
   methods: {
@@ -169,7 +184,9 @@ export default {
       this.$emit('on-property-click', property);
     },
     updatePropertiesForSale(properties) {
-      this.topPropertiesByPrice = properties.sort((a, b) => b.price - a.price).slice(0, this.desiredResultSize);
+      this.propertiesForSale = properties;
+      this.topPropertiesByPriceDesc = properties.sort((a, b) => b.price - a.price).slice(0, this.desiredResultSize);
+      this.topPropertiesByPriceAsc = properties.sort((a, b) => a.price - b.price).slice(0, this.desiredResultSize);
     },
     updateTopCabins(cabins) {
       this.cabins = cabins;
@@ -325,7 +342,7 @@ export default {
         showPropertiesForSale,
         propertyForSale,
     ) {
-      this.showCabinsForSale = showCabinsForRent;
+      this.showCabinForRent = showCabinsForRent;
       this.showPropertiesForSale = showPropertiesForSale;
       if (showCabinsForRent) {
         client.get(`/cabins?region=${region}&district=${district}&locality=${locality}&rating=${rating}&reviews=${review}&averagePricePerNight=${price}&occupancy=${occupancy}&attributes=${attributes}&star=${star}&numberOfRegularBeds=${numberOfRegularBeds}&numberOfBedrooms=${numberOfBedrooms}`)

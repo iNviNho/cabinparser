@@ -228,6 +228,9 @@ export default {
       if (urlParams.get('numberOfBedrooms') !== null) {
         this.selectedNumberOfBedrooms = urlParams.getAll('numberOfBedrooms');
       }
+      this.showCabinsForRent = urlParams.get('showCabinsForRent') === 'true' || urlParams.get('showCabinsForRent') === null;
+      this.showPropertiesForSale = urlParams.get('showPropertiesForSale') === 'true' || urlParams.get('showPropertiesForSale') === null;
+      this.selectedPropertyForSale = urlParams.getAll('propertyForSale').toString() === '' ? null : urlParams.getAll('propertyForSale');
       this.filtersChanged();
     }
   },
@@ -260,7 +263,7 @@ export default {
 .inline-block {
   display: block;
   margin: 10px;
-  padding: 0 6px;
+  padding: 0 15px;
 }
 
 .inline-block h3 {

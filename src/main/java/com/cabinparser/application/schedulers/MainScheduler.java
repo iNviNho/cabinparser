@@ -7,6 +7,8 @@ import com.cabinparser.application.schedulers.sub.FourthOccupancyCalculateSchedu
 import com.cabinparser.application.schedulers.sub.SecondUpdateMegaubytovanieCabinOccupancyJob;
 import com.cabinparser.application.schedulers.sub.SixthUpdateCabinAttributesScheduler;
 import com.cabinparser.application.schedulers.sub.ThirdUpdateDistrictRegionAndLocalityOfAllData;
+import com.cabinparser.application.schedulers.sub.UpdateAvailabilityOfPropertiesForSale;
+import com.cabinparser.application.schedulers.sub.UpdatePriceDiffsForPropertiesForSale;
 import io.micronaut.scheduling.annotation.Scheduled;
 import jakarta.inject.Singleton;
 import lombok.AllArgsConstructor;
@@ -15,6 +17,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class MainScheduler {
 
+  private final UpdateAvailabilityOfPropertiesForSale updateAvailabilityOfPropertiesForSale;
   protected FirstFetchAndProcessMegaubytovanieCabinsJob firstFetchAndProcessMegaubytovanieCabinsJob;
   protected SecondUpdateMegaubytovanieCabinOccupancyJob secondUpdateMegaubytovanieCabinOccupancyJob;
   protected ThirdUpdateDistrictRegionAndLocalityOfAllData thirdUpdateDistrictRegionAndLocalityOfAllData;
@@ -22,10 +25,13 @@ public class MainScheduler {
   protected FifthCalculateAveragePricePerNightScheduler fifthCalculateAveragePricePerNightScheduler;
   protected SixthUpdateCabinAttributesScheduler sixthUpdateCabinAttributesScheduler;
   protected FetchAndProcessTopRealityCabinsForSale fetchAndProcessTopRealityCabinsForSale;
+  protected UpdatePriceDiffsForPropertiesForSale updatePriceDiffsForPropertiesForSale;
 
   @Scheduled(initialDelay = "0s", fixedDelay = "1d")
   public void start() throws InterruptedException {
     // fetchAndProcessTopRealityCabinsForSale.parse();
+    // updatePriceDiffsForPropertiesForSale.parse();
+    // updateAvailabilityOfPropertiesForSale.parse();
 
     // firstFetchAndProcessMegaubytovanieCabinsJob.parse();
     // secondUpdateMegaubytovanieCabinOccupancyJob.parse();

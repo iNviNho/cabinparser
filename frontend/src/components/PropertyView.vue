@@ -24,13 +24,13 @@
             </span>
           </td>
           <td>{{ cabin.category }}</td>
-          <td>{{ cabin.region }}</td>
-          <td>{{ cabin.district }}</td>
-          <td>{{ cabin.locality }}</td>
+          <td class="fix-name-column-must">{{ cabin.region }} <span v-if="cabin.regionPriceToAverageDifference != null" :class="getClass(cabin.regionPriceToAverageDifference)">{{ cabin.regionPriceToAverageDifference }}%</span></td>
+          <td class="fix-name-column-must">{{ cabin.district }} <span v-if="cabin.districtPriceToAverageDifference != null" :class="getClass(cabin.districtPriceToAverageDifference)">{{ cabin.districtPriceToAverageDifference }}%</span></td>
+          <td class="fix-name-column-must">{{ cabin.locality }} <span v-if="cabin.localityPriceToAverageDifference != null" :class="getClass(cabin.localityPriceToAverageDifference)">{{ cabin.localityPriceToAverageDifference }}%</span></td>
           <td>{{ cabin.estate }}m²</td>
           <td>{{ cabin.houseEstate }}m²</td>
           <td>{{ cabin.floorEstate }}m²</td>
-          <td>{{ cabin.price.toLocaleString('fr-FR') }}€</td>
+          <td style="text-align: right">{{ cabin.price.toLocaleString('fr-FR') }}€</td>
         </tr>
       </table>
     </div>
@@ -45,6 +45,15 @@ export default {
     data: Array,
   },
   methods: {
+    getClass(value) {
+      let number = Number(value);
+      if (number > 0) {
+        return 'red-span';
+      } else if (number < 0) {
+        return 'green-span';
+      }
+      return 'neutral-span';
+    },
     showProperty(property) {
       this.$emit('on-property-click', property);
     }
@@ -91,6 +100,15 @@ export default {
   white-space: nowrap;
 }
 
+.fix-name-column-must {
+  width: 250px;
+  max-width: 250px;
+  min-width: 250px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .fix-region-column {
   width: 125px;
   max-width: 125px;
@@ -106,6 +124,30 @@ export default {
 
 .showcabinp:hover {
   text-decoration: underline;
+}
+
+.red-span {
+  background-color: red;
+  color: #fff;
+  font-size: 15px;
+  padding: 2px 5px;
+  border-radius: 5px;
+}
+
+.green-span {
+  background-color: green;
+  color: #fff;
+  font-size: 15px;
+  padding: 2px 5px;
+  border-radius: 5px;
+}
+
+.neutral-span {
+  background-color: #808080;
+  color: #fff;
+  font-size: 15px;
+  padding: 2px 5px;
+  border-radius: 5px;
 }
 
 </style>

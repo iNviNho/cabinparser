@@ -32,6 +32,7 @@ public class PropertyForSaleController {
   ) {
     return propertyForSaleRepository.getAllForSale()
       .stream()
+      .filter(cabin -> cabin.getDeletedAt() == null)
       .filter(cabin -> doStringComparison(region, cabin.getRegion()))
       .filter(cabin -> doStringComparison(district, cabin.getDistrict()))
       .filter(cabin -> doStringComparison(locality, cabin.getLocality()))

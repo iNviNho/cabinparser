@@ -28,4 +28,7 @@ public class PropertyForSaleResponse {
   private String link;
   private boolean star;
   private String category;
+  private BigDecimal regionPriceToAverageDifference;
+  private BigDecimal districtPriceToAverageDifference;
+  private BigDecimal localityPriceToAverageDifference;
 }

@@ -67,5 +67,11 @@ public class PropertyForSale {
     private boolean star;
 
     private String category;
+    @Column(name = "region_price_to_average_difference")
+    private BigDecimal regionPriceToAverageDifference;
+    @Column(name = "district_price_to_average_difference")
+    private BigDecimal districtPriceToAverageDifference;
+    @Column(name = "locality_price_to_average_difference")
+    private BigDecimal localityPriceToAverageDifference;
 
 }

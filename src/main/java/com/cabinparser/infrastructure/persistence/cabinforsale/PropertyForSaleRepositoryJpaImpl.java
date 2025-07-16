@@ -39,6 +39,14 @@ public class PropertyForSaleRepositoryJpaImpl implements PropertyForSaleReposito
   }
 
   @Override
+  public List<PropertyForSale> getAllForSaleByCategory(String category) {
+    return this.propertyForSaleJpaRepository.findByCategory(category)
+      .stream()
+      .map(propertyForSaleJpaEntityMapper::toDomain)
+      .toList();
+  }
+
+  @Override
   public Optional<PropertyForSale> getByLink(String link) {
     return propertyForSaleJpaRepository.getByLink(link)
       .map(propertyForSaleJpaEntityMapper::toDomain);

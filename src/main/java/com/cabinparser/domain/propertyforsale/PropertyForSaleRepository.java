@@ -12,4 +12,6 @@ public interface PropertyForSaleRepository {
   List<PropertyForSale> getAllForSale();
 
   void update(PropertyForSale propertyForSale);
+
+  List<PropertyForSale> getAllForSaleByCategory(String category);
 }
