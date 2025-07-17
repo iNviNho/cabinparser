@@ -60,6 +60,17 @@
         <li :class="activeComponent === 'topPropertyByPriceAsc' ? 'active' : ''"
             @click="changeActiveComponent('topPropertyByPriceAsc')">Top podla ceny vzostupne
         </li>
+
+        <li :class="activeComponent === 'topPropertiesByRegionPriceDiffDesc' ? 'active' : ''"
+            @click="changeActiveComponent('topPropertiesByRegionPriceDiffDesc')">Top podla ceny za m2 podla kraju
+        </li>
+        <li :class="activeComponent === 'topPropertiesByDistrictPriceDiffDesc' ? 'active' : ''"
+            @click="changeActiveComponent('topPropertiesByDistrictPriceDiffDesc')">Top podla ceny za m2 podla okresu
+        </li>
+        <li :class="activeComponent === 'topPropertiesByLocalityPriceDiffDesc' ? 'active' : ''"
+            @click="changeActiveComponent('topPropertiesByLocalityPriceDiffDesc')">Top podla ceny za m2 podla lokality
+        </li>
+
         <br style="clear: both;">
       </ul>
     </div>
@@ -84,6 +95,20 @@
         v-if="topPropertiesByPriceAsc.length > 0 && activeComponent === 'topPropertyByPriceAsc'"
         :data="topPropertiesByPriceAsc" @on-property-click="onPropertyClick"
       ></PropertyView>
+
+      <PropertyView
+        v-if="topPropertiesByRegionPriceDiffDesc.length > 0 && activeComponent === 'topPropertiesByRegionPriceDiffDesc'"
+        :data="topPropertiesByRegionPriceDiffDesc" @on-property-click="onPropertyClick"
+      ></PropertyView>
+      <PropertyView
+        v-if="topPropertiesByDistrictPriceDiffDesc.length > 0 && activeComponent === 'topPropertiesByDistrictPriceDiffDesc'"
+        :data="topPropertiesByDistrictPriceDiffDesc" @on-property-click="onPropertyClick"
+      ></PropertyView>
+      <PropertyView
+        v-if="topPropertiesByLocalityPriceDiffDesc.length > 0 && activeComponent === 'topPropertiesByLocalityPriceDiffDesc'"
+        :data="topPropertiesByLocalityPriceDiffDesc" @on-property-click="onPropertyClick"
+      ></PropertyView>
+
       <TableView v-if="topCabinsByRating.length > 0 && activeComponent === 'topCabinsByRating'"
                  :data="topCabinsByRating" @on-cabin-click="onCabinClick"></TableView>
       <TableView v-if="topCabinsByReviews.length > 0 && activeComponent === 'topCabinsByReviews'"
@@ -170,7 +195,10 @@ export default {
       showPropertiesForSale: true,
       propertiesForSale: [],
       topPropertiesByPriceDesc: [],
-      topPropertiesByPriceAsc: []
+      topPropertiesByPriceAsc: [],
+      topPropertiesByRegionPriceDiffDesc: [],
+      topPropertiesByDistrictPriceDiffDesc: [],
+      topPropertiesByLocalityPriceDiffDesc: [],
     }
   },
   methods: {
@@ -187,6 +215,9 @@ export default {
       this.propertiesForSale = properties;
       this.topPropertiesByPriceDesc = properties.sort((a, b) => b.price - a.price).slice(0, this.desiredResultSize);
       this.topPropertiesByPriceAsc = properties.sort((a, b) => a.price - b.price).slice(0, this.desiredResultSize);
+      this.topPropertiesByRegionPriceDiffDesc = properties.sort((a, b) => a.regionPriceToAverageDifference - b.regionPriceToAverageDifference).slice(0, this.desiredResultSize);
+      this.topPropertiesByDistrictPriceDiffDesc = properties.sort((a, b) => a.districtPriceToAverageDifference - b.districtPriceToAverageDifference).slice(0, this.desiredResultSize);
+      this.topPropertiesByLocalityPriceDiffDesc = properties.sort((a, b) => a.localityPriceToAverageDifference - b.localityPriceToAverageDifference).slice(0, this.desiredResultSize);
     },
     updateTopCabins(cabins) {
       this.cabins = cabins;

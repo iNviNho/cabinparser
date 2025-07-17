@@ -44,6 +44,7 @@ public class LocationsController {
       .filter(cabin -> Arrays.stream(region.split(",")).anyMatch(cabin.getRegion()::contains))
       .filter(cabin -> Arrays.stream(district.split(",")).anyMatch(cabin.getDistrict()::contains))
       .map(Cabin::getLocality)
+      .filter(locality -> locality != null && !locality.isEmpty())
       .distinct()
       .collect(Collectors.toList());
   }
