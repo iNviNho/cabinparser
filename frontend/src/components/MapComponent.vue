@@ -96,7 +96,6 @@ export default {
       }
     },
     stopDrag() {
-      console.log('stopDrag');
       this.isDragging = false;
     },
     getApiKey() {

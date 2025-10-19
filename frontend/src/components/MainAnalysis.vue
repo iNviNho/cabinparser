@@ -206,10 +206,10 @@ export default {
       this.activeComponent = name;
     },
     onCabinClick(cabin) {
-      this.$emit('on-cabin-click', cabin);
+      this.$emit('on-cabin-click', {cabin: cabin, cabinForRent: null});
     },
     onPropertyClick(property) {
-      this.$emit('on-property-click', property);
+      this.$emit('on-property-click', {cabin: null, cabinForRent: property});
     },
     updatePropertiesForSale(properties) {
       this.propertiesForSale = properties;
