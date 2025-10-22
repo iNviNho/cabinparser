@@ -86,6 +86,11 @@
         >{{ option }}
         </option>
       </select>
+      <select v-if="componentsThatNeedGroupByMinCount.includes(activeComponent)" id="desiredMinCountOfCabinsSelect" v-model="desiredMinCount" @change="updateTopCabins(this.cabins); updatePropertiesForSale(this.propertiesForSale)">
+        <option v-for="option in desiredMinCountOfCabinsOptions" :key="option" :value="option"
+        >{{ option }}
+        </option>
+      </select>
       <br style="clear: both;">
       <PropertyView
         v-if="topPropertiesByPriceDesc.length > 0 && activeComponent === 'topPropertyByPriceDesc'"
@@ -173,8 +178,11 @@ export default {
       activeComponent: 'topCabinsByRating',
       cabins: [],
       desiredResultSizeOptions: [5, 10, 25, 50, 100, 250],
+      desiredMinCountOfCabinsOptions: [1, 2 , 4, 6, 8, 10, 20],
       componentsThatNeedGroupBy: ['cabinsCount', 'dailyVisits', 'dailyCapacity', 'occupancy', 'monthlyIncome', 'pricePerNight'],
+      componentsThatNeedGroupByMinCount: ['occupancy', 'monthlyIncome', 'pricePerNight', 'occupancyPerCabinSize' , 'occupancyPerCabinSize', 'occupancyPerCabinRegularSleepingBeds'],
       desiredGroupByOptions: ['Region', 'Okres', 'Lokalita'],
+      desiredMinCount: 10,
       desiredResultSize: 25,
       desiredGroupBy: 'Region',
       topCabinsByRating: [],
@@ -273,6 +281,9 @@ export default {
         } : {totalOccupancy: cabin.occupancy, count: 1};
         return acc;
       }, {}))
+        .filter((value => {
+          return value[1].count >= this.desiredMinCount;
+        }))
         .map(([key, value]) => ({key, value: {value: (value.totalOccupancy / value.count * 100).toFixed(2), count: value.count}}))
         .sort((a, b) => b.value.value - a.value.value)
         .map(({key, value}) => ({key: key, value: value.value + '%' + " - [" + value.count + "chat]"}))
@@ -290,6 +301,9 @@ export default {
         } : {monthlyIncome: (cabin.avgPricePerNight * cabin.occupancy * 30), count: 1};
         return acc;
       }, {}))
+        .filter((value => {
+          return value[1].count >= this.desiredMinCount;
+        }))
         .map(([key, value]) => ({key, value: {value: (value.monthlyIncome / value.count).toFixed(2), count: value.count}}))
         .sort((a, b) => b.value.value - a.value.value)
         .map(({key, value}) => ({key: key, value: value.value + '€' + " - [" + value.count + "chat]"}))
@@ -306,6 +320,9 @@ export default {
         } : {pricePerNight: cabin.avgPricePerNight / cabin.maxPerson, count: 1};
         return acc;
       }, {}))
+        .filter((value => {
+          return value[1].count >= this.desiredMinCount;
+        }))
         .map(([key, value]) => ({key, value: {value: (value.pricePerNight / value.count).toFixed(2), count: value.count}}))
         .sort((a, b) => b.value.value - a.value.value)
         .map(({key, value}) => ({key: key, value: value.value + '€' + " - [" + value.count + "chat]"}))
@@ -323,6 +340,9 @@ export default {
         } : {occupancy: cabin.occupancy, count: 1};
         return acc;
       }, {}))
+        .filter((value => {
+          return value[1].count >= this.desiredMinCount;
+        }))
         .map(([key, value]) => ({key, value: {value: (value.occupancy / value.count * 100).toFixed(2), count: value.count}}))
         .sort((a, b) => b.value.value - a.value.value)
         .map(({key, value}) => ({key: key, value: value.value + '%' + " - [" + value.count + "chat]"}))
@@ -340,6 +360,9 @@ export default {
         } : {occupancy: cabin.occupancy, count: 1};
         return acc;
       }, {}))
+        .filter((value => {
+          return value[1].count >= this.desiredMinCount;
+        }))
         .map(([key, value]) => ({key, value: {value: (value.occupancy / value.count * 100).toFixed(2), count: value.count}}))
         .sort((a, b) => b.value.value - a.value.value)
         .map(({key, value}) => ({key: key, value: value.value + '%' + " - [" + value.count + "chat]"}))
@@ -430,7 +453,7 @@ ul li.active {
   color: white;
 }
 
-#desiredResultSelect, #desiredGroupedBySelect {
+#desiredResultSelect, #desiredGroupedBySelect, #desiredMinCountOfCabinsSelect {
   margin-bottom: 10px;
   padding: 5px;
   border-radius: 5px;
