@@ -3,6 +3,8 @@ package com.cabinparser.application.schedulers.sub;
 import com.cabinparser.application.Constants;
 import com.cabinparser.domain.cabin.Cabin;
 import com.cabinparser.domain.cabin.CabinRepository;
+import com.cabinparser.domain.keyvalue.KeyValue;
+import com.cabinparser.domain.keyvalue.KeyValueService;
 import com.cabinparser.domain.propertyforsale.PropertyForSale;
 import com.cabinparser.domain.propertyforsale.PropertyForSaleRepository;
 import com.cabinparser.infrastructure.api.googlemaps.GeoResponse;
@@ -14,6 +16,7 @@ import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import java.time.Duration;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 import lombok.extern.slf4j.Slf4j;
 
@@ -28,6 +31,8 @@ public class ThirdUpdateDistrictRegionAndLocalityOfAllData {
   private PropertyForSaleRepository propertyForSaleRepository;
   @Inject
   private GoogleMapsApiClient googleMapsApiClient;
+  @Inject
+  private KeyValueService keyValueService;
   @Value("${google.api-key}")
   private String key;
 
@@ -105,10 +110,8 @@ public class ThirdUpdateDistrictRegionAndLocalityOfAllData {
       ) {
         log.info("Starting updating geolocation for Cabin {}", cabin.getName());
 
-        final GeoResponse response = googleMapsApiClient.geoRequest(
-          cabin.getGpsPositionLatitude() + "," + cabin.getGpsPositionLongitude(),
-          key
-        );
+
+        final GeoResponse response = getGeoResponse(cabin);
         final AtomicReference<String> locality = new AtomicReference<>(null);
         final AtomicReference<String> region = new AtomicReference<>(null);
         final AtomicReference<String> district = new AtomicReference<>(null);
@@ -156,6 +159,38 @@ public class ThirdUpdateDistrictRegionAndLocalityOfAllData {
       }
     });
 
+  }
+
+  private GeoResponse getGeoResponse(Cabin cabin) {
+    // key is concat of month and year
+    final String key = "google-maps-api-key-usage-" +
+      java.time.LocalDate.now().getYear() +
+      "-" +
+      java.time.LocalDate.now().getMonthValue();
+    final Optional<KeyValue> keyValue = keyValueService.getById(key);
+
+    if (keyValue.isPresent()) {
+      final int usage = Integer.parseInt(keyValue.get().getValue());
+      // we can do max 10 000 requests per month for free
+      if (usage >= 10000) {
+        log.error("Google Maps API key usage limit reached for this month ({} requests). Aborting further requests.", usage);
+        throw new RuntimeException("Google Maps API key usage limit reached for this month.");
+      } else {
+        // we update usage before request as we assume request will be fired
+        // and we rather overcount than undercount
+        final KeyValue updatedKeyValue = new KeyValue(key, String.valueOf(usage + 1));
+        keyValueService.update(updatedKeyValue);
+      }
+    } else {
+      // we init key value here
+      final KeyValue newKeyValue = new KeyValue(key, "1");
+      keyValueService.insert(newKeyValue);
+    }
+
+    return googleMapsApiClient.geoRequest(
+      cabin.getGpsPositionLatitude() + "," + cabin.getGpsPositionLongitude(),
+      key
+    );
   }
 
 }
