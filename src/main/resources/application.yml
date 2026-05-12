@@ -30,7 +30,7 @@ micronaut:
 datasources:
   default:
     dialect: POSTGRES
-    url: jdbc:postgresql://127.0.0.1:5432/cabin_parser
+    url: jdbc:postgresql://127.0.0.1:5432/cabin_parser_dump
     driverClassName: org.postgresql.Driver
     username: root
     password: root

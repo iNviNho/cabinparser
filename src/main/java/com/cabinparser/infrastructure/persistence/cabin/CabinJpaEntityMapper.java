@@ -4,6 +4,9 @@ import com.cabinparser.domain.cabin.Cabin;
 import com.cabinparser.domain.cabin.CabinAttributes;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.Arrays;
 import java.util.List;
 import org.mapstruct.Mapper;
@@ -47,7 +50,8 @@ public interface CabinJpaEntityMapper {
       return List.of();
     }
     try {
-      result = Arrays.asList(objectMapper.readValue(value, CabinAttributes[].class));
+      final CabinAttributes[] array = objectMapper.readValue(value, CabinAttributes[].class);
+      result = array == null ? List.of() : Arrays.asList(array);
     } catch (final JsonProcessingException e) {
       throw new RuntimeException(e);
     }

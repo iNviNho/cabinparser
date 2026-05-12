@@ -2,6 +2,8 @@ services:
   cabin-parser-db:
     container_name: cabin-parser-db
     image: postgres:16.9-alpine
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
     environment:
       POSTGRES_DB: cabin_parser
       POSTGRES_USER: root

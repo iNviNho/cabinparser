@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Variables
-DB_NAME="cabin_parser"
+DB_NAME="cabin_parser_dump"
 DB_USER="root"
 BACKUP_FILE="backup_$(date +%Y%m%d).dump"
 

@@ -22,3 +22,4 @@ bin/
 
 src/main/resources/application-local.yml
 frontend/cabin-parser-app/public/config.js
+postgres-data/*
